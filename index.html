@@ -28,7 +28,7 @@
     }
   </script>
 
-  <!-- External Processing CDN Libraries -->
+  <!-- External Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -42,12 +42,35 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #030712;
-      color: #f3f4f6;
+      transition: background-color 0.4s ease, color 0.4s ease;
       overflow-x: hidden;
     }
 
-    .glass-panel {
+    /* Dark Mode Styling */
+    html.dark body {
+      background-color: #030712;
+      background-image: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 70%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 243, 255, 0.1), transparent 60%);
+      color: #f3f4f6;
+    }
+
+    /* Light Mode Styling */
+    html:not(.dark) body {
+      background-color: #e2e8f0;
+      background-image: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.08), transparent 70%),
+                        radial-gradient(circle at 20% 50%, rgba(0, 243, 255, 0.08), transparent 60%);
+      color: #020617;
+    }
+
+    /* Dynamic Text Colors for Light vs Dark */
+    html.dark .text-brand-accent { color: #00F3FF; }
+    html:not(.dark) .text-brand-accent { color: #020617; }
+
+    html.dark .bg-brand-accent { background-color: #00F3FF; color: #030712; }
+    html:not(.dark) .bg-brand-accent { background-color: #020617; color: #ffffff; }
+
+    /* Glass Panels */
+    html.dark .glass-panel {
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -55,40 +78,78 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     }
 
-    .glass-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    html:not(.dark) .glass-panel {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(15, 23, 42, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Dark Cards & Text for Light Mode */
+    html.dark .glass-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html:not(.dark) .glass-card {
+      background: #cbd5e1;
+      backdrop-filter: blur(16px);
+      border: 1px solid #94a3b8;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-card {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .glass-card:hover {
-      border-color: rgba(0, 243, 255, 0.5);
-      transform: translateY(-5px) scale(1.01);
-      box-shadow: 0 15px 35px rgba(0, 243, 255, 0.2);
+      border-color: #7C3AED;
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 30px rgba(124, 58, 237, 0.25);
     }
 
     .badge-pill {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 8px;
       border-radius: 9999px;
       border-width: 1px;
       backdrop-filter: blur(8px);
     }
 
+    html.dark .badge-styled {
+      background-color: rgba(0, 243, 255, 0.1);
+      color: #00F3FF;
+      border-color: rgba(0, 243, 255, 0.3);
+    }
+
+    html:not(.dark) .badge-styled {
+      background-color: #020617;
+      color: #ffffff;
+      border-color: #020617;
+    }
+
     .glow-btn-cyan {
+      transition: all 0.3s ease;
+    }
+
+    html.dark .glow-btn-cyan {
       background: #00F3FF;
       color: #030712;
       font-weight: 700;
       box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-      transition: all 0.3s ease;
+    }
+
+    html:not(.dark) .glow-btn-cyan {
+      background: #020617;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(2, 6, 23, 0.3);
     }
 
     .glow-btn-cyan:hover {
-      background: #38f6ff;
-      box-shadow: 0 0 35px rgba(0, 243, 255, 0.7);
       transform: translateY(-2px);
     }
 
@@ -111,137 +172,198 @@
     }
 
     .progress-shimmer {
-      background: linear-gradient(90deg, #00F3FF, #7C3AED, #FF007F, #00F3FF);
+      background: linear-gradient(90deg, #7C3AED, #FF007F, #7C3AED);
       background-size: 200% 100%;
       animation: shimmerBar 1.5s infinite linear;
     }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #030712; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
   </style>
 </head>
-<body class="bg-[#030712] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#00F3FF] selection:text-slate-950">
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#7C3AED] selection:text-white">
 
-  <!-- Background Canvas -->
-  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-50"></canvas>
+  <!-- Canvas Particles -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
   <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 backdrop-blur-2xl bg-[#030712]/80 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-50 backdrop-blur-2xl dark:bg-[#030712]/80 bg-white/90 border-b dark:border-white/10 border-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
       
       <!-- Logo -->
-      <a href="javascript:void(0)" onclick="goHome()" class="flex items-center gap-3 shrink-0 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00F3FF] via-[#7C3AED] to-[#FF007F] p-[1px] shadow-[0_0_20px_rgba(0,243,255,0.3)]">
-          <div class="w-full h-full bg-[#030712] rounded-[11px] flex items-center justify-center font-black text-[#00F3FF] text-xl group-hover:rotate-12 transition-transform">
+      <a href="javascript:void(0)" onclick="goHome()" class="flex items-center gap-2 sm:gap-3 shrink-0 group">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#7C3AED] via-[#FF007F] to-[#7C3AED] p-[1px] shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+          <div class="w-full h-full dark:bg-[#030712] bg-white rounded-[11px] flex items-center justify-center font-black text-brand-accent text-lg sm:text-xl group-hover:rotate-12 transition-transform">
             ⚡
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="text-xl sm:text-2xl font-black text-white tracking-tight">
-            Smart<span class="text-[#00F3FF]">Toolkit</span> <span class="text-[#FF007F] text-xs px-1.5 py-0.5 rounded bg-[#FF007F]/10 border border-[#FF007F]/30">PRO</span>
+          <span class="text-lg sm:text-2xl font-black dark:text-white text-slate-900 tracking-tight">
+            Smart<span class="text-brand-accent">Toolkit</span> <span class="text-[#FF007F] text-[10px] sm:text-xs px-1.5 py-0.5 rounded bg-[#FF007F]/10 border border-[#FF007F]/30">PRO</span>
           </span>
-          <span class="text-[10px] text-slate-400 font-mono hidden sm:inline-block">60+ BROWSER-NATIVE UTILITIES</span>
+          <span class="text-[9px] sm:text-[10px] dark:text-slate-400 text-slate-600 font-mono hidden sm:inline-block">60+ BROWSER-NATIVE UTILITIES</span>
         </div>
       </a>
 
       <!-- Search Input -->
       <div class="flex items-center gap-4 flex-1 max-w-md">
         <div class="relative w-full">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">
             🔍
           </div>
           <input
             type="text"
             id="globalSearchInput"
-            placeholder="Search 60+ tools (e.g. PDF Merge, Converter, QR)..."
-            class="w-full bg-slate-900/90 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#00F3FF] transition-all"
+            placeholder="Search 60+ tools (e.g. PDF, Converter, QR)..."
+            class="w-full dark:bg-slate-900/90 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl py-2 pl-9 pr-4 text-xs sm:text-sm dark:text-slate-100 text-slate-900 font-medium placeholder-slate-500 focus:outline-none focus:border-[#7C3AED] transition-all"
           />
         </div>
       </div>
 
-      <!-- Actions -->
-      <div class="flex items-center gap-3">
-        <button onclick="goHome()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 hover:border-[#00F3FF]/50 text-xs font-bold text-white transition-all shadow-md">
+      <!-- Header Controls & Auth -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="p-2 sm:px-3 sm:py-2 rounded-xl dark:bg-slate-900 bg-slate-200 border dark:border-white/10 border-slate-400 text-xs font-bold dark:text-yellow-400 text-slate-900 hover:scale-105 transition-all flex items-center gap-1.5 shadow-sm">
+          <span id="themeIcon">☀️</span>
+          <span id="themeLabel" class="hidden md:inline text-[11px]">Light Mode</span>
+        </button>
+
+        <!-- User Profile / Auth Button Container -->
+        <div id="authHeaderContainer"></div>
+
+        <button onclick="goHome()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl dark:bg-slate-900 bg-slate-200 border dark:border-white/10 border-slate-400 text-xs font-bold dark:text-white text-slate-900 transition-all shadow-sm">
           <span>🏠</span>
           <span class="hidden sm:inline">Home</span>
         </button>
-
-        <div class="hidden lg:flex items-center gap-2">
-          <span class="badge-pill bg-[#00F3FF]/10 text-[#00F3FF] border-[#00F3FF]/30">⚡ 100% Client-Side</span>
-          <span class="badge-pill bg-[#FF007F]/10 text-[#FF007F] border-[#FF007F]/30">🔒 Zero Uploads</span>
-        </div>
       </div>
 
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section id="heroSection" class="relative pt-10 pb-8 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto z-10">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-semibold text-[#00F3FF] mb-6 shadow-[0_0_20px_rgba(0,243,255,0.2)]">
-      <span>🚀 Ultra Fast Browser Engine</span>
-      <span class="text-slate-600">•</span>
-      <span class="text-slate-300">Offline Responsive</span>
+  <section id="heroSection" class="relative pt-8 pb-6 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto z-10">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full dark:bg-slate-900/90 bg-white border dark:border-white/10 border-slate-300 text-xs font-semibold text-brand-accent mb-4 shadow-sm">
+      <span>🚀 Client-Side Engine</span>
+      <span class="text-slate-400">•</span>
+      <span class="dark:text-slate-300 text-slate-700">Protected Workspace</span>
     </div>
 
-    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight sm:leading-none">
-      <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">60+ Powerful Tools.</span> <br />
-      <span class="bg-gradient-to-r from-[#00F3FF] via-[#7C3AED] to-[#FF007F] bg-clip-text text-transparent">One Smart Workspace.</span>
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+      <span class="dark:bg-gradient-to-r dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-slate-950 dark:text-transparent">60+ Powerful Tools.</span> <br />
+      <span class="bg-gradient-to-r from-[#7C3AED] via-[#FF007F] to-[#7C3AED] bg-clip-text text-transparent">One Smart Workspace.</span>
     </h1>
 
-    <p class="mt-4 text-sm sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-      Merge PDFs, Convert Images, Scan QR Codes, Calculate EMIs, and Verify Password Hashes directly in your browser.
+    <p class="mt-3 text-xs sm:text-base dark:text-slate-400 text-slate-700 font-medium max-w-xl mx-auto leading-relaxed">
+      Login to access PDF Merger, Format Converters, Scanners, and Password Verifiers securely.
     </p>
 
-    <!-- Category Filter Bar -->
-    <div class="mt-8 flex items-center justify-center gap-2 flex-wrap max-w-4xl mx-auto" id="categoryFilterContainer"></div>
+    <!-- Filter Categories -->
+    <div class="mt-6 flex items-center justify-center gap-1.5 flex-wrap max-w-4xl mx-auto" id="categoryFilterContainer"></div>
   </section>
 
-  <!-- Main Active Content Area -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 z-10 my-6">
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 z-10 my-4">
     
-    <!-- Tool Execution Workspace Drawer -->
-    <section id="toolWorkspace" class="hidden glass-panel rounded-3xl p-6 sm:p-8 mb-12 border border-white/10 relative overflow-hidden transition-all duration-500">
-      <div class="flex items-center justify-between pb-6 border-b border-white/10 mb-6 flex-wrap gap-4">
-        <div class="flex items-center gap-3">
-          <button onclick="goHome()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-xs font-bold text-slate-300 hover:text-white transition-all">
-            🏠 Return to Catalog
+    <!-- Workspace Drawer -->
+    <section id="toolWorkspace" class="hidden glass-panel rounded-2xl p-5 sm:p-7 mb-8 transition-all duration-500">
+      <div class="flex items-center justify-between pb-4 border-b dark:border-white/10 border-slate-300 mb-5 flex-wrap gap-3">
+        <div class="flex items-center gap-2.5">
+          <button onclick="goHome()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg dark:bg-slate-900 bg-slate-200 text-xs font-bold dark:text-slate-300 text-slate-800 hover:text-purple-600 transition-all">
+            🏠 Return
           </button>
           <div>
-            <h2 id="activeToolTitle" class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2"></h2>
-            <p id="activeToolDesc" class="text-xs sm:text-sm text-slate-400 mt-0.5"></p>
+            <h2 id="activeToolTitle" class="text-lg sm:text-xl font-bold dark:text-white text-slate-900 flex items-center gap-2"></h2>
+            <p id="activeToolDesc" class="text-xs dark:text-slate-400 text-slate-600 mt-0.5 font-medium"></p>
           </div>
         </div>
-        <span id="activeToolCategory" class="text-xs font-mono px-3 py-1 rounded-full bg-[#00F3FF]/10 text-[#00F3FF] border border-[#00F3FF]/30"></span>
+        <span id="activeToolCategory" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/30"></span>
       </div>
 
-      <!-- Animated Progress Loading Bar (Active on All Tasks) -->
-      <div id="loadingLineContainer" class="hidden my-4 space-y-2">
-        <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <!-- Progress Line Bar -->
+      <div id="loadingLineContainer" class="hidden my-3 space-y-1.5">
+        <div class="flex justify-between items-center text-xs font-mono text-purple-400">
           <span id="loadingStatusText">Processing Task...</span>
           <span id="loadingPercentText">0%</span>
         </div>
-        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+        <div class="w-full dark:bg-slate-900 bg-slate-200 h-2 rounded-full overflow-hidden border dark:border-white/10 border-slate-300">
           <div id="loadingFillBar" class="h-full progress-shimmer transition-all duration-300 w-0"></div>
         </div>
       </div>
 
-      <!-- Dynamic Tool Container -->
-      <div id="dynamicToolContainer" class="min-h-[220px]"></div>
+      <div id="dynamicToolContainer" class="min-h-[180px]"></div>
     </section>
 
-    <!-- Primary Grid Section -->
-    <section id="toolsCatalogSection" class="space-y-12"></section>
+    <!-- Primary Grid Catalog Section -->
+    <section id="toolsCatalogSection" class="space-y-8"></section>
 
   </main>
 
+  <!-- Login / Sign Up Modal Overlay -->
+  <div id="authModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+    <div class="glass-panel max-w-md w-full p-6 sm:p-8 rounded-2xl relative border dark:border-white/10 border-slate-300">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm">✕</button>
+      
+      <div class="text-center mb-4">
+        <h3 class="text-lg font-black dark:text-white text-slate-900">Account Access Required</h3>
+        <p class="text-xs dark:text-slate-400 text-slate-600 font-medium">Please Login or Sign Up to unlock all 60+ tools.</p>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="flex border-b dark:border-white/10 border-slate-300 mb-6">
+        <button id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 py-2 font-bold text-xs border-b-2 border-[#7C3AED] text-[#7C3AED]">Login</button>
+        <button id="signupTabBtn" onclick="switchAuthTab('signup')" class="flex-1 py-2 font-bold text-xs text-slate-400 border-b-2 border-transparent">Sign Up</button>
+      </div>
+
+      <!-- Login Form with Remember Me -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Email Address</label>
+          <input type="email" id="loginEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+        </div>
+        
+        <!-- Remember Me Checkbox -->
+        <div class="flex items-center justify-between text-xs">
+          <label class="flex items-center gap-2 cursor-pointer dark:text-slate-300 text-slate-700 font-semibold select-none">
+            <input type="checkbox" id="rememberMe" class="rounded border-slate-400 text-[#7C3AED] focus:ring-0 cursor-pointer" />
+            <span>Remember Me</span>
+          </label>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan mt-2">Login to Access Workspace</button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
+        <div>
+          <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Full Name</label>
+          <input type="text" id="signupName" required placeholder="John Doe" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Email Address</label>
+          <input type="email" id="signupEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Create Password</label>
+          <input type="password" id="signupPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-pink mt-2">Create Account</button>
+      </form>
+
+      <div id="authStatusMsg" class="mt-4 text-xs font-mono text-center"></div>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="mt-auto border-t border-white/10 bg-[#030712]/90 backdrop-blur-xl z-10 py-8 text-slate-500 text-xs text-center">
-    SmartToolkit Pro © 2026. Production-Ready Cyberpunk Suite.
+  <footer class="mt-auto border-t dark:border-white/10 border-slate-300 dark:bg-[#030712]/90 bg-white/90 backdrop-blur-xl z-10 py-6 text-slate-500 text-xs text-center">
+    SmartToolkit Pro © 2026. Production-Ready Suite.
   </footer>
 
-  <!-- App Script -->
+  <!-- Single-File JavaScript Engine -->
   <script>
     if (window.pdfjsLib) {
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -259,34 +381,18 @@
     ];
 
     const TOOLS_DATABASE = [
-      // PDF
-      { id: 'pdf-merge', name: 'PDF File Merger', category: 'pdf', desc: 'Combine multiple PDF files into one ordered master document.', icon: '🧩', badge: 'Working' },
-      { id: 'pdf-to-jpg', name: 'PDF to JPG Converter', category: 'pdf', desc: 'Convert PDF pages into HD JPG images with 1-Click ZIP Download.', icon: '📸', badge: 'Popular' },
-      { id: 'jpg-to-pdf', name: 'JPG / PNG to PDF', category: 'pdf', desc: 'Merge JPG or PNG images into a single formatted PDF file.', icon: '🖼️' },
-
-      // Image
-      { id: 'image-converter', name: 'Image Format Converter', category: 'image', desc: 'Convert instantly between PNG, JPG, and WEBP formats.', icon: '🔄', badge: 'Fast' },
-      { id: 'resize-image', name: 'Image Resizer & Compressor', category: 'image', desc: 'Reduce file size and adjust custom pixel dimensions.', icon: '📐' },
-
-      // Text
-      { id: 'word-counter', name: 'Word & Character Counter', category: 'text', desc: 'Real-time sentence, word, character, and reading time analytics.', icon: '📊', badge: 'Fast' },
-      { id: 'case-converter', name: 'Case Converter', category: 'text', desc: 'Switch text between UPPERCASE, lowercase, Title Case & CamelCase.', icon: '🔠' },
-      { id: 'lorem-ipsum', name: 'Lorem Ipsum Generator', category: 'text', desc: 'Generate custom placeholder design text copy.', icon: '📜' },
-
-      // Calculators
-      { id: 'emi-calculator', name: 'Loan EMI Calculator', category: 'calculators', desc: 'Calculate monthly loan payment EMI and total interest breakdowns.', icon: '💰', badge: 'Finance' },
-      { id: 'gst-calculator', name: 'GST / Tax Calculator', category: 'calculators', desc: 'Calculate net price, gross price, and GST components.', icon: '🏷️' },
-      { id: 'age-calculator', name: 'Age Calculator', category: 'calculators', desc: 'Calculate exact age in years, months, and days.', icon: '🎂' },
-
-      // AI Tools
-      { id: 'ai-email-writer', name: 'AI Email Draft Assistant', category: 'ai', desc: 'Generate structured work emails based on bullet prompts.', icon: '📧', badge: 'AI' },
-
-      // Utility & Developer
-      { id: 'qr-generator', name: 'QR Code Generator', category: 'utility', desc: 'Generate high-contrast scannable QR codes for phone scanning.', icon: '📱', badge: 'Fixed' },
-      { id: 'qr-scanner', name: 'QR Code Scanner', category: 'utility', desc: 'Scan QR codes live using Camera or uploaded Image file.', icon: '📷', badge: 'Scannable' },
-      { id: 'password-generator', name: 'Password Generator & Hash Engine', category: 'utility', desc: 'Generate strong secure passwords with SHA-256 Hash.', icon: '🔑' },
-      { id: 'password-verifier', name: 'Password / Hash Match Verifier', category: 'developer', desc: 'Verify and match plain text passwords against SHA-256 Hashes.', icon: '🔍', badge: 'Decoder' },
-      { id: 'hash-generator', name: 'Hash Generator', category: 'developer', desc: 'Compute SHA-256 cryptographic text hashes.', icon: '🔒' }
+      { id: 'pdf-merge', name: 'PDF File Merger', category: 'pdf', desc: 'Combine multiple PDF files into one ordered document.', icon: '🧩', badge: 'Working' },
+      { id: 'pdf-to-jpg', name: 'PDF to JPG Converter', category: 'pdf', desc: 'Convert PDF pages into HD JPG images with ZIP download.', icon: '📸', badge: 'Popular' },
+      { id: 'jpg-to-pdf', name: 'JPG / PNG to PDF', category: 'pdf', desc: 'Merge JPG or PNG images into a single PDF document.', icon: '🖼️' },
+      { id: 'image-converter', name: 'Image Format Converter', category: 'image', desc: 'Convert between PNG, JPG, and WEBP formats.', icon: '🔄', badge: 'Fast' },
+      { id: 'word-counter', name: 'Word & Character Counter', category: 'text', desc: 'Real-time text analytics and reading time metrics.', icon: '📊', badge: 'Fast' },
+      { id: 'case-converter', name: 'Case Converter', category: 'text', desc: 'Switch text between UPPERCASE, lowercase & Title Case.', icon: '🔠' },
+      { id: 'emi-calculator', name: 'Loan EMI Calculator', category: 'calculators', desc: 'Calculate monthly loan EMI and interest breakdowns.', icon: '💰', badge: 'Finance' },
+      { id: 'ai-email-writer', name: 'AI Email Draft Assistant', category: 'ai', desc: 'Generate structured work emails based on prompts.', icon: '📧', badge: 'AI' },
+      { id: 'qr-generator', name: 'QR Code Generator', category: 'utility', desc: 'Generate scannable QR codes for phone camera scanning.', icon: '📱', badge: 'Fixed' },
+      { id: 'qr-scanner', name: 'QR Code Scanner', category: 'utility', desc: 'Scan QR codes live using Camera or Image files.', icon: '📷', badge: 'Scannable' },
+      { id: 'password-generator', name: 'Password Generator & Hash Engine', category: 'utility', desc: 'Generate secure passwords with SHA-256 Hash.', icon: '🔑' },
+      { id: 'password-verifier', name: 'Password / Hash Match Verifier', category: 'developer', desc: 'Verify plain text passwords against SHA-256 Hashes.', icon: '🔍', badge: 'Decoder' }
     ];
 
     let activeCategory = 'all';
@@ -294,6 +400,175 @@
     let activeToolId = null;
     let filesQueue = [];
     let convertedImagesCache = [];
+    let isDarkMode = true;
+    let currentUser = null;
+
+    // --- SHA-256 Helper ---
+    async function computeSha256(str) {
+      const buffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // --- Auth State Management with Remember Me ---
+    function initAuth() {
+      const session = localStorage.getItem('smart_user_session');
+      if (session) {
+        currentUser = JSON.parse(session);
+      }
+
+      // Check Remembered Email
+      const rememberedEmail = localStorage.getItem('remembered_user_email');
+      if (rememberedEmail) {
+        const emailInput = document.getElementById('loginEmail');
+        const rememberChk = document.getElementById('rememberMe');
+        if (emailInput && rememberChk) {
+          emailInput.value = rememberedEmail;
+          rememberChk.checked = true;
+        }
+      }
+
+      renderAuthHeader();
+    }
+
+    function renderAuthHeader() {
+      const container = document.getElementById('authHeaderContainer');
+      if (currentUser) {
+        container.innerHTML = `
+          <div class="flex items-center gap-2 dark:bg-slate-900 bg-slate-200 border dark:border-white/10 border-slate-300 px-3 py-1.5 rounded-xl">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="text-xs font-extrabold dark:text-white text-slate-900">${currentUser.name}</span>
+            <button onclick="logoutUser()" class="text-[10px] text-rose-500 font-bold hover:underline ml-1">Logout</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <button onclick="openAuthModal()" class="px-3.5 py-2 rounded-xl bg-brand-accent text-[#030712] font-extrabold text-xs shadow-md transition-all">
+            Login / Sign Up
+          </button>
+        `;
+      }
+    }
+
+    function openAuthModal() {
+      document.getElementById('authModal').classList.remove('hidden');
+      const rememberedEmail = localStorage.getItem('remembered_user_email');
+      if (rememberedEmail) {
+        document.getElementById('loginEmail').value = rememberedEmail;
+        document.getElementById('rememberMe').checked = true;
+      }
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+      document.getElementById('authStatusMsg').innerText = '';
+    }
+
+    function switchAuthTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const loginBtn = document.getElementById('loginTabBtn');
+      const signupBtn = document.getElementById('signupTabBtn');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        loginBtn.className = "flex-1 py-2 font-bold text-xs border-b-2 border-[#7C3AED] text-[#7C3AED]";
+        signupBtn.className = "flex-1 py-2 font-bold text-xs text-slate-400 border-b-2 border-transparent";
+      } else {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        signupBtn.className = "flex-1 py-2 font-bold text-xs border-b-2 border-[#FF007F] text-[#FF007F]";
+        loginBtn.className = "flex-1 py-2 font-bold text-xs text-slate-400 border-b-2 border-transparent";
+      }
+    }
+
+    async function handleSignup(e) {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const pwd = document.getElementById('signupPassword').value;
+      const msg = document.getElementById('authStatusMsg');
+
+      const hash = await computeSha256(pwd);
+      let users = JSON.parse(localStorage.getItem('smart_users_db') || '[]');
+
+      if (users.find(u => u.email === email)) {
+        msg.className = "mt-4 text-xs font-mono text-center text-rose-500 font-bold";
+        msg.innerText = "Email already registered!";
+        return;
+      }
+
+      users.push({ name, email, passHash: hash });
+      localStorage.setItem('smart_users_db', JSON.stringify(users));
+
+      msg.className = "mt-4 text-xs font-mono text-center text-emerald-500 font-bold";
+      msg.innerText = "Account created! Switching to Login...";
+
+      setTimeout(() => { switchAuthTab('login'); }, 1000);
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const pwd = document.getElementById('loginPassword').value;
+      const remember = document.getElementById('rememberMe').checked;
+      const msg = document.getElementById('authStatusMsg');
+
+      const hash = await computeSha256(pwd);
+      let users = JSON.parse(localStorage.getItem('smart_users_db') || '[]');
+      const user = users.find(u => u.email === email && u.passHash === hash);
+
+      if (user) {
+        currentUser = { name: user.name, email: user.email };
+        localStorage.setItem('smart_user_session', JSON.stringify(currentUser));
+
+        // Handle Remember Me
+        if (remember) {
+          localStorage.setItem('remembered_user_email', email);
+        } else {
+          localStorage.removeItem('remembered_user_email');
+        }
+
+        renderAuthHeader();
+        renderToolsCatalog();
+        msg.className = "mt-4 text-xs font-mono text-center text-emerald-500 font-bold";
+        msg.innerText = "Login Successful!";
+        setTimeout(closeAuthModal, 800);
+      } else {
+        msg.className = "mt-4 text-xs font-mono text-center text-rose-500 font-bold";
+        msg.innerText = "Invalid Email or Password!";
+      }
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('smart_user_session');
+      currentUser = null;
+      renderAuthHeader();
+      renderToolsCatalog();
+      goHome();
+    }
+
+    // --- Theme Switcher ---
+    function toggleTheme() {
+      isDarkMode = !isDarkMode;
+      const html = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+
+      if (isDarkMode) {
+        html.classList.add('dark');
+        icon.innerText = '☀️';
+        label.innerText = 'Light Mode';
+      } else {
+        html.classList.remove('dark');
+        icon.innerText = '🌙';
+        label.innerText = 'Dark Mode';
+      }
+      renderCategoryFilters();
+      renderToolsCatalog();
+    }
 
     function goHome() {
       activeToolId = null;
@@ -325,10 +600,10 @@
       container.innerHTML = TOOL_CATEGORIES.map(cat => `
         <button
           onclick="setCategory('${cat.id}')"
-          class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
+          class="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
             activeCategory === cat.id
-              ? 'bg-[#00F3FF] text-slate-950 font-bold shadow-[0_0_20px_rgba(0,243,255,0.4)]'
-              : 'bg-slate-900/90 text-slate-400 border border-white/10 hover:border-white/20 hover:text-white'
+              ? 'bg-brand-accent text-slate-950 font-black shadow-md'
+              : 'dark:bg-slate-900/90 bg-slate-300 dark:text-slate-400 text-slate-900 font-extrabold dark:border-white/10 border-slate-400 hover:text-purple-600'
           }"
         >
           <span class="mr-1">${cat.icon}</span> ${cat.name}
@@ -342,6 +617,7 @@
       renderToolsCatalog();
     }
 
+    // Render Cards with High-Contrast Text for Light Mode
     function renderToolsCatalog() {
       const container = document.getElementById('toolsCatalogSection');
       
@@ -353,27 +629,29 @@
       });
 
       if (filteredTools.length === 0) {
-        container.innerHTML = `<div class="text-center py-12 glass-panel rounded-3xl"><p class="text-slate-400 text-sm">No tools found matching your query.</p></div>`;
+        container.innerHTML = `<div class="text-center py-10 glass-panel rounded-2xl"><p class="text-slate-400 text-xs">No tools found matching your search term.</p></div>`;
         return;
       }
 
       container.innerHTML = `
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           ${filteredTools.map(tool => `
             <div
               onclick="openToolWorkspace('${tool.id}')"
-              class="glass-card p-6 rounded-2xl cursor-pointer flex flex-col justify-between group"
+              class="glass-card p-4 rounded-xl cursor-pointer flex flex-col justify-between group relative overflow-hidden"
             >
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-3xl p-2 rounded-xl bg-slate-900 border border-white/10 group-hover:scale-110 transition-transform">${tool.icon}</span>
-                  ${tool.badge ? `<span class="badge-pill bg-[#00F3FF]/10 text-[#00F3FF] border-[#00F3FF]/30">${tool.badge}</span>` : ''}
+                <div class="flex items-center justify-between mb-2.5">
+                  <span class="text-xl p-1.5 rounded-lg dark:bg-slate-900 bg-slate-400 text-slate-950 dark:text-white dark:border-white/10 border-slate-500 group-hover:scale-105 transition-transform">${tool.icon}</span>
+                  ${tool.badge ? `<span class="badge-pill badge-styled">${tool.badge}</span>` : ''}
                 </div>
-                <h3 class="text-lg font-bold text-white group-hover:text-[#00F3FF] transition-colors">${tool.name}</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">${tool.desc}</p>
+                <h3 class="text-sm font-black dark:text-white text-slate-950 group-hover:text-purple-600 transition-colors">${tool.name}</h3>
+                <p class="text-[11px] font-bold dark:text-slate-400 text-slate-900 mt-1 leading-relaxed">${tool.desc}</p>
               </div>
-              <div class="mt-6 flex items-center text-xs font-semibold text-[#00F3FF] gap-1 group-hover:translate-x-1 transition-transform">
-                Open Utility →
+              <div class="mt-4 flex items-center justify-between text-[11px] font-black text-brand-accent">
+                <span class="group-hover:translate-x-1 transition-transform">
+                  ${currentUser ? 'Open Utility →' : '🔒 Login to Access'}
+                </span>
               </div>
             </div>
           `).join('')}
@@ -382,6 +660,11 @@
     }
 
     function openToolWorkspace(toolId) {
+      if (!currentUser) {
+        openAuthModal();
+        return;
+      }
+
       const tool = TOOLS_DATABASE.find(t => t.id === toolId);
       if (!tool) return;
 
@@ -406,85 +689,74 @@
 
       if (tool.id === 'qr-generator') {
         container.innerHTML = `
-          <div class="space-y-4 max-w-xl mx-auto text-center">
-            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
-            <button onclick="execQrGenerator()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Generate Scannable QR Code</button>
-            <div id="qrOutput" class="flex flex-col items-center justify-center pt-4"></div>
+          <div class="space-y-3 max-w-lg mx-auto text-center">
+            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+            <button onclick="execQrGenerator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Generate Scannable QR Code</button>
+            <div id="qrOutput" class="flex flex-col items-center justify-center pt-3"></div>
           </div>
         `;
       } else if (tool.id === 'password-verifier') {
         container.innerHTML = `
-          <div class="space-y-4 max-w-xl mx-auto">
+          <div class="space-y-3 max-w-lg mx-auto">
             <div>
-              <label class="text-xs text-slate-400">Plain Password String</label>
-              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
+              <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Plain Password String</label>
+              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
             </div>
             <div>
-              <label class="text-xs text-slate-400">SHA-256 Hash String</label>
-              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash string..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
+              <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">SHA-256 Hash String</label>
+              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
             </div>
-            <button onclick="execVerifyPasswordHash()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Verify Password & Hash Match</button>
-            <div id="outputContainer" class="mt-4"></div>
+            <button onclick="execVerifyPasswordHash()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Verify Password & Hash Match</button>
+            <div id="outputContainer" class="mt-3"></div>
           </div>
         `;
-      } else if (tool.id === 'image-converter') {
+      } else if (tool.id === 'emi-calculator') {
         container.innerHTML = `
-          <div class="space-y-4 max-w-xl mx-auto text-center">
-            <div class="text-left">
-              <label class="text-xs text-slate-400">Target Output Format</label>
-              <select id="targetImageFormat" class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm">
-                <option value="image/png">PNG Format</option>
-                <option value="image/jpeg">JPG Format</option>
-                <option value="image/webp">WEBP Format</option>
-              </select>
+          <div class="space-y-3 max-w-lg mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Loan Amount (₹)</label>
+                <input type="number" id="emiLoan" value="500000" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Interest Rate (%)</label>
+                <input type="number" id="emiRate" step="0.1" value="8.5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Tenure (Years)</label>
+                <input type="number" id="emiTenure" value="5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+              </div>
             </div>
-            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] bg-slate-900/60 rounded-2xl p-6 cursor-pointer transition-all">
-              <span class="text-3xl block mb-2">🖼️</span>
-              <span class="text-sm font-bold text-white block">Select Image File</span>
-              <input type="file" id="fileInput" accept="image/*" onchange="handleFileQueue(event)" class="hidden" />
-            </label>
-            <div id="fileQueueStatus" class="text-xs text-cyan-400 font-mono"></div>
-            <button onclick="execConvertImageFormat()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Convert Image Format</button>
-            <div id="outputContainer" class="mt-4"></div>
-          </div>
-        `;
-      } else if (tool.id === 'lorem-ipsum') {
-        container.innerHTML = `
-          <div class="space-y-4 max-w-xl mx-auto">
-            <div>
-              <label class="text-xs text-slate-400">Paragraphs Count</label>
-              <input type="number" id="loremCount" value="3" min="1" max="10" class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm" />
-            </div>
-            <button onclick="execLoremIpsum()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Generate Lorem Ipsum Copy</button>
-            <div id="outputContainer" class="mt-4"></div>
+            <button onclick="execEmiCalculator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Calculate Loan EMI</button>
+            <div id="outputContainer" class="mt-3"></div>
           </div>
         `;
       } else if (tool.category === 'pdf' || tool.category === 'image') {
         container.innerHTML = `
-          <div class="space-y-6 max-w-2xl mx-auto text-center">
-            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] bg-slate-900/60 rounded-2xl p-8 cursor-pointer transition-all">
-              <span class="text-4xl block mb-2">📁</span>
-              <span class="text-sm font-bold text-white block">Select or Drop Files Here</span>
-              <span class="text-xs text-slate-400 block mt-1">Processed safely inside your browser</span>
+          <div class="space-y-4 max-w-xl mx-auto text-center">
+            <label class="block border-2 border-dashed border-[#7C3AED]/50 hover:border-[#7C3AED] dark:bg-slate-900/60 bg-slate-200 rounded-xl p-6 cursor-pointer transition-all">
+              <span class="text-3xl block mb-1">📁</span>
+              <span class="text-xs font-black dark:text-white text-slate-900 block">Select or Drop Files Here</span>
+              <span class="text-[10px] font-bold text-slate-700 dark:text-slate-400 block mt-0.5">Processed safely in your browser</span>
               <input type="file" id="fileInput" multiple onchange="handleFileQueue(event)" class="hidden" />
             </label>
-            <div id="fileQueueStatus" class="text-xs text-cyan-400 font-mono"></div>
-            <button onclick="execFileTask()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Execute Task</button>
-            <div id="outputContainer" class="mt-4"></div>
+            <div id="fileQueueStatus" class="text-[11px] text-purple-600 dark:text-cyan-400 font-mono font-bold"></div>
+            <button onclick="execFileTask()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Execute Task</button>
+            <div id="outputContainer" class="mt-3"></div>
           </div>
         `;
       } else {
         container.innerHTML = `
-          <div class="space-y-4 max-w-2xl mx-auto">
-            <textarea id="textInput" rows="5" placeholder="Type or paste input text here..." class="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-white text-sm font-mono focus:outline-none focus:border-[#00F3FF]"></textarea>
-            <button onclick="execTextTask()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Process Utility Task</button>
-            <div id="outputContainer" class="mt-4"></div>
+          <div class="space-y-3 max-w-xl mx-auto">
+            <textarea id="textInput" rows="4" placeholder="Type or paste input text here..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl p-3 text-xs font-mono dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]"></textarea>
+            <button onclick="execTextTask()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Process Task</button>
+            <div id="outputContainer" class="mt-3"></div>
           </div>
         `;
       }
     }
 
-    // --- 9. WORKING EXECUTORS ---
+    // --- Executors ---
     function execQrGenerator() {
       const text = document.getElementById('qrText').value;
       const output = document.getElementById('qrOutput');
@@ -494,13 +766,13 @@
       showProgressLine("Generating High-Contrast Scannable QR...", 50);
 
       const qrdiv = document.createElement('div');
-      qrdiv.className = "p-4 bg-white rounded-2xl inline-block shadow-xl";
+      qrdiv.className = "p-3 bg-white rounded-xl inline-block shadow-lg";
       output.appendChild(qrdiv);
       
       const qr = new QRCode(qrdiv, { 
         text: text, 
-        width: 180, 
-        height: 180,
+        width: 160, 
+        height: 160,
         colorDark: "#000000",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
@@ -515,21 +787,11 @@
           const downloadBtn = document.createElement('a');
           downloadBtn.href = img.src;
           downloadBtn.download = 'Scannable_QRCode.png';
-          downloadBtn.className = 'mt-4 inline-block px-5 py-2.5 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-xl shadow-lg hover:bg-cyan-300';
-          downloadBtn.innerText = '⬇ Download High-Res QR Code PNG';
+          downloadBtn.className = 'mt-3 inline-block px-4 py-2 bg-purple-600 text-white font-bold text-[11px] rounded-lg shadow hover:bg-purple-700';
+          downloadBtn.innerText = '⬇ Download QR PNG';
           output.appendChild(downloadBtn);
         }
       }, 400);
-    }
-
-    async function computeSha256(str) {
-      const buffer = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subcrypto ? crypto.subtle.digest('SHA-256', buffer) : null;
-      if (hashBuffer) {
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      }
-      return btoa(str);
     }
 
     async function execVerifyPasswordHash() {
@@ -548,8 +810,8 @@
       setTimeout(hideProgressLine, 800);
 
       output.innerHTML = `
-        <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm ${isMatch ? 'text-emerald-400 border-emerald-500/40' : 'text-rose-400 border-rose-500/40'}">
-          <p class="font-bold text-base mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs ${isMatch ? 'text-emerald-500 font-bold border-emerald-500/40' : 'text-rose-600 font-bold border-rose-500/40'}">
+          <p class="font-black text-sm mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
           <p>• Plain Password: ${plain}</p>
           <p class="break-all">• Target Hash: ${hash}</p>
           <p class="break-all">• Computed Hash: ${computedHash}</p>
@@ -557,56 +819,21 @@
       `;
     }
 
-    function execConvertImageFormat() {
-      if (!filesQueue.length) return alert('Please select an image file.');
-      const targetFmt = document.getElementById('targetImageFormat').value;
-      const output = document.getElementById('outputContainer');
+    function execEmiCalculator() {
+      const p = Number(document.getElementById('emiLoan').value);
+      const r = Number(document.getElementById('emiRate').value) / 12 / 100;
+      const n = Number(document.getElementById('emiTenure').value) * 12;
+      const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const totalPayable = emi * n;
+      const totalInterest = totalPayable - p;
 
-      showProgressLine("Converting Image Format...", 50);
-
-      const file = filesQueue[0];
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-
-          const convertedUrl = canvas.toDataURL(targetFmt, 0.92);
-          const ext = targetFmt.split('/')[1];
-
-          showProgressLine("Format Converted!", 100);
-          setTimeout(hideProgressLine, 800);
-
-          output.innerHTML = `
-            <div class="bg-slate-950 p-4 rounded-xl border border-white/10 text-center">
-              <img src="${convertedUrl}" class="max-h-48 mx-auto rounded mb-3" />
-              <a href="${convertedUrl}" download="converted_image.${ext}" class="inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-lg">⬇ Download Converted Image (${ext.toUpperCase()})</a>
-            </div>
-          `;
-        };
-        img.src = evt.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function execLoremIpsum() {
-      const count = Number(document.getElementById('loremCount').value);
-      const output = document.getElementById('outputContainer');
-      const sample = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
-      
-      showProgressLine("Generating Lorem Copy...", 80);
-
-      let result = [];
-      for (let i = 0; i < count; i++) result.push(sample);
-
-      showProgressLine("Generated!", 100);
-      setTimeout(hideProgressLine, 600);
-
-      output.innerHTML = `<pre class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 whitespace-pre-wrap">${result.join('\n\n')}</pre>`;
+      document.getElementById('outputContainer').innerHTML = `
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-black space-y-1">
+          <p>• Monthly EMI: ₹${emi.toFixed(2)}</p>
+          <p>• Total Interest: ₹${totalInterest.toFixed(2)}</p>
+          <p>• Total Amount Payable: ₹${totalPayable.toFixed(2)}</p>
+        </div>
+      `;
     }
 
     function handleFileQueue(e) {
@@ -624,46 +851,41 @@
         try {
           if (filesQueue.length < 2) return alert('Select at least 2 PDF files to merge.');
 
-          showProgressLine("Initializing PDF Merger Engine...", 20);
-
+          showProgressLine("Merging PDFs...", 30);
           const { PDFDocument } = PDFLib;
           const mergedPdf = await PDFDocument.create();
 
           for (let i = 0; i < filesQueue.length; i++) {
-            const file = filesQueue[i];
-            const percent = Math.round(((i + 1) / filesQueue.length) * 80);
-            showProgressLine(`Merging File ${i + 1}/${filesQueue.length}: ${file.name}`, percent);
-
-            const buffer = await file.arrayBuffer();
+            const buffer = await filesQueue[i].arrayBuffer();
             const pdfDoc = await PDFDocument.load(buffer);
             const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
             copiedPages.forEach((page) => mergedPdf.addPage(page));
           }
 
-          showProgressLine("Saving Master Merged PDF...", 95);
+          showProgressLine("Saving Master PDF...", 90);
           const pdfBytes = await mergedPdf.save();
           const blob = new Blob([pdfBytes], { type: 'application/pdf' });
           const pdfUrl = URL.createObjectURL(blob);
 
           showProgressLine("✨ PDFs Merged Successfully!", 100);
-          setTimeout(hideProgressLine, 1000);
+          setTimeout(hideProgressLine, 800);
 
           output.innerHTML = `
-            <div class="bg-slate-950 p-4 rounded-xl border border-white/10 text-center">
-              <p class="text-xs text-emerald-400 font-bold mb-2">✨ Master Combined PDF Ready!</p>
-              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-5 py-2.5 bg-[#00F3FF] text-slate-950 rounded-xl text-xs font-bold shadow-lg">⬇ Download Merged Master PDF</a>
+            <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 text-center">
+              <p class="text-xs text-emerald-500 font-extrabold mb-2">✨ Merged PDF Ready!</p>
+              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-4 py-2 bg-purple-600 text-white rounded-lg text-xs font-bold shadow">⬇ Download Merged Master PDF</a>
             </div>
           `;
         } catch (err) {
           hideProgressLine();
-          output.innerHTML = `<p class="text-xs text-rose-400 font-mono">Error merging PDFs: ${err.message}</p>`;
+          output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Error: ${err.message}</p>`;
         }
       } else if (activeToolId === 'pdf-to-jpg') {
         try {
           let totalPages = 0;
           let parsedPdfs = [];
 
-          showProgressLine("Reading PDF Files...", 10);
+          showProgressLine("Reading PDF Pages...", 10);
 
           for (let file of filesQueue) {
             const buffer = await file.arrayBuffer();
@@ -695,18 +917,18 @@
           }
 
           showProgressLine("✨ Conversion Complete!", 100);
-          setTimeout(hideProgressLine, 1000);
+          setTimeout(hideProgressLine, 800);
 
           output.innerHTML = `
-            <div class="space-y-4">
-              <button onclick="downloadAllAsZip()" class="w-full py-3 rounded-xl font-bold glow-btn-pink">
+            <div class="space-y-3">
+              <button onclick="downloadAllAsZip()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-pink">
                 📦 Download All Pages (ZIP Archive)
               </button>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 ${convertedImagesCache.map(c => `
-                  <div class="bg-slate-950 p-2 rounded-xl border border-white/10 text-center">
-                    <img src="${c.url}" class="w-full h-24 object-cover rounded mb-2" />
-                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-cyan-400 font-bold hover:underline">⬇ Download</a>
+                  <div class="dark:bg-slate-950 bg-slate-100 p-2 rounded-xl border dark:border-white/10 border-slate-400 text-center">
+                    <img src="${c.url}" class="w-full h-20 object-cover rounded mb-1.5" />
+                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-purple-600 dark:text-cyan-400 font-extrabold hover:underline">⬇ Download</a>
                   </div>
                 `).join('')}
               </div>
@@ -714,29 +936,25 @@
           `;
         } catch (err) {
           hideProgressLine();
-          output.innerHTML = `<p class="text-xs text-rose-400 font-mono">Error: ${err.message}</p>`;
+          output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Error: ${err.message}</p>`;
         }
       } else {
-        output.innerHTML = '<p class="text-xs text-emerald-400 font-mono">✨ Task executed successfully!</p>';
+        output.innerHTML = '<p class="text-xs text-emerald-500 font-mono">✨ Task executed successfully!</p>';
       }
     }
 
     function downloadAllAsZip() {
       if (!convertedImagesCache.length) return;
       const zip = new JSZip();
-      convertedImagesCache.forEach(img => {
-        zip.file(img.name, img.data, { base64: true });
-      });
-      zip.generateAsync({ type: 'blob' }).then(content => {
-        saveAs(content, 'Converted_PDF_Pages.zip');
-      });
+      convertedImagesCache.forEach(img => zip.file(img.name, img.data, { base64: true }));
+      zip.generateAsync({ type: 'blob' }).then(content => saveAs(content, 'Converted_PDF_Pages.zip'));
     }
 
     async function execTextTask() {
       const input = document.getElementById('textInput').value;
       const output = document.getElementById('outputContainer');
 
-      showProgressLine("Processing Text Task...", 70);
+      showProgressLine("Processing Text...", 70);
 
       if (activeToolId === 'word-counter') {
         const words = input.trim() ? input.trim().split(/\s+/).length : 0;
@@ -747,7 +965,7 @@
         setTimeout(hideProgressLine, 600);
 
         output.innerHTML = `
-          <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 space-y-1">
+          <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold space-y-1">
             <p>• Words: ${words}</p>
             <p>• Characters: ${chars}</p>
             <p>• Sentences: ${sentences}</p>
@@ -758,31 +976,31 @@
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
         let pwd = "";
         for (let i = 0; i < 16; i++) pwd += chars.charAt(Math.floor(Math.random() * chars.length));
-        
         const hash = await computeSha256(pwd);
 
-        showProgressLine("Password & Hash Generated!", 100);
+        showProgressLine("Password & Hash Ready!", 100);
         setTimeout(hideProgressLine, 600);
 
         output.innerHTML = `
-          <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 space-y-2">
-            <p><span class="text-white font-bold">Generated Password:</span> ${pwd}</p>
-            <p class="break-all"><span class="text-white font-bold">SHA-256 Hash:</span> ${hash}</p>
+          <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold space-y-1.5">
+            <p><span class="dark:text-white text-slate-950 font-black">Password:</span> ${pwd}</p>
+            <p class="break-all"><span class="dark:text-white text-slate-950 font-black">SHA-256:</span> ${hash}</p>
           </div>
         `;
       } else {
         showProgressLine("Task Executed!", 100);
         setTimeout(hideProgressLine, 600);
-        output.innerHTML = `<pre class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400">${input}</pre>`;
+        output.innerHTML = `<pre class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold">${input}</pre>`;
       }
     }
 
-    // --- 10. APP INITIALIZATION & PARTICLES ---
+    // App Init & Particles
     document.getElementById('globalSearchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderToolsCatalog();
     });
 
+    initAuth();
     renderCategoryFilters();
     renderToolsCatalog();
 
@@ -796,12 +1014,12 @@
       height = canvas.height = window.innerHeight;
     });
 
-    const particles = Array.from({ length: 45 }, () => ({
+    const particles = Array.from({ length: 40 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       radius: Math.random() * 2 + 0.5,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
       color: ['#00F3FF', '#7C3AED', '#FF007F'][Math.floor(Math.random() * 3)]
     }));
 
