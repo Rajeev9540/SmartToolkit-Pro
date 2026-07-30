@@ -6,8 +6,8 @@
   <title>SmartToolkit Pro — One Workspace. 60+ Powerful Tools.</title>
   <meta name="description" content="Production-grade browser-native suite for PDF, Image, Media, Text, Calculators, AI, and Utility tools." />
   
-  <!-- Exact Same High-Resolution Multi-Color Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='neonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300F3FF'/%3E%3Cstop offset='50%25' stop-color='%237C3AED'/%3E%3Cstop offset='100%25' stop-color='%23FF007F'/%3E%3C/linearGradient%3E%3ClinearGradient id='boltGrad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFE600'/%3E%3Cstop offset='100%25' stop-color='%23FF5500'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='3' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%23090d16'/%3E%3Crect x='4' y='4' width='92' height='92' rx='20' fill='none' stroke='url(%23neonGrad)' stroke-width='6' opacity='0.95'/%3E%3Cpath d='M 58 10 L 22 52 L 48 52 L 38 90 L 78 42 L 52 42 Z' fill='url(%23boltGrad)' filter='url(%23glow)' stroke='%23FFFFFF' stroke-width='1.5'/%3E%3C/svg%3E">
+  <!-- Ultra-Vibrant Colorful SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='vibrantGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300F3FF'/%3E%3Cstop offset='50%25' stop-color='%237C3AED'/%3E%3Cstop offset='100%25' stop-color='%23FF007F'/%3E%3C/linearGradient%3E%3ClinearGradient id='boltGrad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFE600'/%3E%3Cstop offset='100%25' stop-color='%23FF5500'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='2' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' rx='26' fill='url(%23vibrantGrad)'/%3E%3Crect x='5' y='5' width='90' height='90' rx='22' fill='none' stroke='%23FFFFFF' stroke-width='4' opacity='0.8'/%3E%3Cpath d='M 58 10 L 22 52 L 48 52 L 38 90 L 78 42 L 52 42 Z' fill='url(%23boltGrad)' filter='url(%23glow)' stroke='%23FFFFFF' stroke-width='2'/%3E%3C/svg%3E">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -225,7 +225,6 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#00F3FF] selection:text-slate-950">
 
-  <!-- Background Canvas -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
   <!-- Sticky Header -->
@@ -256,7 +255,7 @@
           <input
             type="text"
             id="globalSearchInput"
-            placeholder="Search 60+ tools (e.g. PDF Merge, Converter, QR)..."
+            placeholder="Search 60+ tools (e.g. PDF Merge, QR, Watermark, SIP)..."
             class="w-full dark:bg-slate-900/90 bg-slate-100 dark:text-slate-100 text-slate-900 font-bold text-xs sm:text-sm rounded-2xl py-2.5 pl-10 pr-12 placeholder-slate-500 focus:outline-none backdrop-blur-md"
           />
           <span class="absolute right-3 top-2.5 text-[10px] dark:bg-slate-800 bg-slate-200 border dark:border-slate-700 border-slate-300 text-[#00F3FF] font-bold px-1.5 py-0.5 rounded-md font-mono hidden sm:inline-block">
@@ -297,7 +296,7 @@
     </h1>
 
     <p class="mt-3.5 text-xs sm:text-base dark:text-slate-400 text-slate-700 font-medium max-w-xl mx-auto leading-relaxed">
-      Login to access PDF Merger, Format Converters, Scanners, and Password Verifiers securely.
+      Login to access PDF Merger, Scanners, Image Editors, JSON Formatter, and Health Calculators securely.
     </p>
 
     <!-- Filter Categories -->
@@ -423,13 +422,19 @@
       { id: 'pdf-to-jpg', name: 'PDF to JPG Converter', category: 'pdf', desc: 'Convert PDF pages into HD JPG images with ZIP download.', icon: '📸', badge: 'Popular' },
       { id: 'jpg-to-pdf', name: 'JPG / PNG to PDF', category: 'pdf', desc: 'Merge JPG or PNG images into a single PDF document.', icon: '🖼️' },
       { id: 'image-converter', name: 'Image Format Converter', category: 'image', desc: 'Convert between PNG, JPG, and WEBP formats.', icon: '🔄', badge: 'Fast' },
+      { id: 'bg-remover', name: 'Background Eraser Mask', category: 'image', desc: 'Remove white/solid image background using canvas color mask.', icon: '✂️', badge: 'New' },
+      { id: 'image-watermark', name: 'Image Crop & Watermark', category: 'image', desc: 'Add custom watermark text and overlay on images.', icon: '🏷️', badge: 'New' },
       { id: 'word-counter', name: 'Word & Character Counter', category: 'text', desc: 'Real-time text analytics and reading time metrics.', icon: '📊', badge: 'Fast' },
       { id: 'case-converter', name: 'Case Converter', category: 'text', desc: 'Switch text between UPPERCASE, lowercase & Title Case.', icon: '🔠' },
       { id: 'emi-calculator', name: 'Loan EMI Calculator', category: 'calculators', desc: 'Calculate monthly loan EMI and interest breakdowns.', icon: '💰', badge: 'Finance' },
+      { id: 'sip-calculator', name: 'SIP Mutual Fund Calculator', category: 'calculators', desc: 'Estimate investment wealth growth and interest returns.', icon: '📈', badge: 'Wealth' },
+      { id: 'bmi-calculator', name: 'BMI Health Calculator', category: 'calculators', desc: 'Calculate Body Mass Index and healthy weight range.', icon: '⚖️', badge: 'Health' },
       { id: 'ai-email-writer', name: 'AI Email Draft Assistant', category: 'ai', desc: 'Generate structured work emails based on prompts.', icon: '📧', badge: 'AI' },
       { id: 'qr-generator', name: 'QR Code Generator', category: 'utility', desc: 'Generate scannable QR codes for phone camera scanning.', icon: '📱', badge: '100% Fixed' },
       { id: 'qr-scanner', name: 'QR Code Scanner', category: 'utility', desc: 'Scan QR codes live using Camera Stream or Image file.', icon: '📷', badge: 'Dual Scan' },
       { id: 'password-generator', name: 'Password Generator & Hash Engine', category: 'utility', desc: 'Generate secure passwords with SHA-256 Hash.', icon: '🔑' },
+      { id: 'json-formatter', name: 'JSON Formatter & Prettifier', category: 'developer', desc: 'Validate, format, and beautify loose JSON structures.', icon: '📜', badge: 'Dev' },
+      { id: 'base64-encoder', name: 'Base64 File / Text Encoder', category: 'developer', desc: 'Encode files or text strings into Base64 format.', icon: '🔤', badge: 'Dev' },
       { id: 'password-verifier', name: 'Password / Hash Match Verifier', category: 'developer', desc: 'Verify plain text passwords against SHA-256 Hashes.', icon: '🔍', badge: 'Decoder' }
     ];
 
@@ -730,67 +735,106 @@
     function renderDynamicWorkspaceUI(tool) {
       const container = document.getElementById('dynamicToolContainer');
 
-      if (tool.id === 'qr-scanner') {
+      if (tool.id === 'qr-generator') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-lg mx-auto text-center">
+            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
+            <button onclick="execQrGenerator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Generate Scannable QR Code</button>
+            <div id="qrOutput" class="flex flex-col items-center justify-center pt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'bg-remover') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-lg mx-auto text-center">
+            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] dark:bg-slate-900/60 bg-slate-100 rounded-xl p-5 cursor-pointer">
+              <span class="text-2xl block mb-1">✂️</span>
+              <span class="text-xs font-bold dark:text-white text-slate-900 block">Select Image with White Background</span>
+              <input type="file" accept="image/*" onchange="execBgRemover(event)" class="hidden" />
+            </label>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'image-watermark') {
+        container.innerHTML = `
+          <div class="space-y-3 max-w-lg mx-auto">
+            <input type="text" id="watermarkText" placeholder="Enter watermark text..." value="SmartToolkit PRO" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900" />
+            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] dark:bg-slate-900/60 bg-slate-100 rounded-xl p-5 cursor-pointer text-center">
+              <span class="text-2xl block mb-1">🏷️</span>
+              <span class="text-xs font-bold dark:text-white text-slate-900 block">Select Image to Add Watermark</span>
+              <input type="file" accept="image/*" onchange="execAddWatermark(event)" class="hidden" />
+            </label>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'sip-calculator') {
+        container.innerHTML = `
+          <div class="space-y-3 max-w-lg mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Monthly Investment (₹)</label>
+                <input type="number" id="sipMonthly" value="5000" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Expected Return (%)</label>
+                <input type="number" id="sipRate" value="12" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Tenure (Years)</label>
+                <input type="number" id="sipYears" value="10" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900" />
+              </div>
+            </div>
+            <button onclick="execSipCalc()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Calculate SIP Wealth Returns</button>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'bmi-calculator') {
+        container.innerHTML = `
+          <div class="space-y-3 max-w-lg mx-auto">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Weight (kg)</label>
+                <input type="number" id="bmiWeight" value="70" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Height (cm)</label>
+                <input type="number" id="bmiHeight" value="175" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900" />
+              </div>
+            </div>
+            <button onclick="execBmiCalc()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Calculate BMI Index</button>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'json-formatter') {
+        container.innerHTML = `
+          <div class="space-y-3 max-w-xl mx-auto">
+            <textarea id="jsonInput" rows="5" placeholder='Paste JSON string here e.g. {"name":"SmartToolkit","pro":true}' class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl p-3 text-xs font-mono dark:text-white text-slate-900"></textarea>
+            <button onclick="execJsonFormatter()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Format & Prettify JSON</button>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'base64-encoder') {
+        container.innerHTML = `
+          <div class="space-y-3 max-w-xl mx-auto">
+            <textarea id="base64Input" rows="4" placeholder="Enter text string to encode to Base64..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl p-3 text-xs font-mono dark:text-white text-slate-900"></textarea>
+            <button onclick="execBase64Encode()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Encode to Base64 String</button>
+            <div id="outputContainer" class="mt-3"></div>
+          </div>
+        `;
+      } else if (tool.id === 'qr-scanner') {
         container.innerHTML = `
           <div class="space-y-4 max-w-lg mx-auto text-center">
             <div class="flex gap-2">
               <button onclick="startLiveCameraScan()" class="flex-1 py-2 bg-gradient-to-r from-[#00F3FF] to-[#7C3AED] text-slate-950 font-bold text-xs rounded-xl shadow">📷 Live Camera Scan</button>
               <button onclick="stopCamera()" class="px-3 py-2 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl">⏹ Stop Camera</button>
             </div>
-            
             <div id="videoContainer" class="hidden relative w-full h-56 bg-black rounded-xl overflow-hidden border border-cyan-500/50">
               <video id="qrVideo" class="w-full h-full object-cover" playsinline></video>
             </div>
-
             <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] dark:bg-slate-900/60 bg-slate-100 rounded-xl p-5 cursor-pointer transition-all">
               <span class="text-2xl block mb-1">🖼️</span>
               <span class="text-xs font-bold dark:text-white text-slate-900 block">Or Upload Image File with QR</span>
               <input type="file" id="qrFileInput" accept="image/*" onchange="execScanQrImage(event)" class="hidden" />
             </label>
-            <div id="outputContainer" class="mt-3"></div>
-          </div>
-        `;
-      } else if (tool.id === 'qr-generator') {
-        container.innerHTML = `
-          <div class="space-y-3 max-w-lg mx-auto text-center">
-            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-            <button onclick="execQrGenerator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Generate Scannable QR Code</button>
-            <div id="qrOutput" class="flex flex-col items-center justify-center pt-3"></div>
-          </div>
-        `;
-      } else if (tool.id === 'password-verifier') {
-        container.innerHTML = `
-          <div class="space-y-3 max-w-lg mx-auto">
-            <div>
-              <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Plain Password String</label>
-              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-            </div>
-            <div>
-              <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">SHA-256 Hash String</label>
-              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-            </div>
-            <button onclick="execVerifyPasswordHash()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Verify Password & Hash Match</button>
-            <div id="outputContainer" class="mt-3"></div>
-          </div>
-        `;
-      } else if (tool.id === 'emi-calculator') {
-        container.innerHTML = `
-          <div class="space-y-3 max-w-lg mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Loan Amount (₹)</label>
-                <input type="number" id="emiLoan" value="500000" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-              </div>
-              <div>
-                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Interest Rate (%)</label>
-                <input type="number" id="emiRate" step="0.1" value="8.5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-              </div>
-              <div>
-                <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Tenure (Years)</label>
-                <input type="number" id="emiTenure" value="5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
-              </div>
-            </div>
-            <button onclick="execEmiCalculator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Calculate Loan EMI</button>
             <div id="outputContainer" class="mt-3"></div>
           </div>
         `;
@@ -819,97 +863,7 @@
       }
     }
 
-    // --- QR Scanner Implementation ---
-    async function startLiveCameraScan() {
-      const output = document.getElementById('outputContainer');
-      const vContainer = document.getElementById('videoContainer');
-      const video = document.getElementById('qrVideo');
-
-      stopCamera();
-      output.innerHTML = '<p class="text-xs text-cyan-400 font-mono">Initializing Camera Stream...</p>';
-
-      try {
-        cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-        video.srcObject = cameraStream;
-        video.setAttribute("playsinline", true);
-        video.play();
-        vContainer.classList.remove('hidden');
-
-        requestAnimationFrame(tickScanVideo);
-      } catch (err) {
-        output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Camera Error: HTTPS connection required or permission denied.</p>`;
-      }
-    }
-
-    function tickScanVideo() {
-      const video = document.getElementById('qrVideo');
-      const output = document.getElementById('outputContainer');
-
-      if (video && video.readyState === video.HAVE_ENOUGH_DATA && cameraStream) {
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-        if (window.jsQR) {
-          const code = jsQR(imageData.data, imageData.width, imageData.height);
-          if (code) {
-            output.innerHTML = `
-              <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border border-emerald-500 font-mono text-xs text-emerald-400">
-                <p class="font-bold text-white mb-1">✅ Live QR Code Scanned:</p>
-                <p class="break-all">${code.data}</p>
-              </div>
-            `;
-            stopCamera();
-            document.getElementById('videoContainer').classList.add('hidden');
-            return;
-          }
-        }
-        requestAnimationFrame(tickScanVideo);
-      } else if (cameraStream) {
-        requestAnimationFrame(tickScanVideo);
-      }
-    }
-
-    function execScanQrImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const output = document.getElementById('outputContainer');
-      output.innerHTML = '<p class="text-xs text-cyan-400 font-mono">Scanning Image QR Code...</p>';
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-          if (window.jsQR) {
-            const code = jsQR(imageData.data, imageData.width, imageData.height);
-            if (code) {
-              output.innerHTML = `
-                <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border border-emerald-500 font-mono text-xs text-emerald-400">
-                  <p class="font-bold text-slate-900 dark:text-white mb-1">✅ QR Code Scanned Result:</p>
-                  <p class="break-all">${code.data}</p>
-                </div>
-              `;
-            } else {
-              output.innerHTML = `<p class="text-xs text-rose-500 font-mono">❌ No QR code detected in this image.</p>`;
-            }
-          }
-        };
-        img.src = evt.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
+    // --- Executors for New Tools ---
     function execQrGenerator() {
       const text = document.getElementById('qrText').value;
       const output = document.getElementById('qrOutput');
@@ -918,14 +872,19 @@
       
       showProgressLine("Generating High-Contrast Scannable QR...", 50);
 
-      const qrdiv = document.createElement('div');
-      qrdiv.className = "p-3 bg-white rounded-xl inline-block shadow-lg";
-      output.appendChild(qrdiv);
+      // Wrapper Card with 30px Solid White Margin for Mobile Scanner Contrast
+      const wrapper = document.createElement('div');
+      wrapper.className = "p-6 bg-white rounded-2xl inline-block shadow-2xl border-4 border-slate-200";
       
+      const qrdiv = document.createElement('div');
+      wrapper.appendChild(qrdiv);
+      output.appendChild(wrapper);
+      
+      // High Precision Error Correction Level H
       const qr = new QRCode(qrdiv, { 
         text: text, 
-        width: 160, 
-        height: 160,
+        width: 200, 
+        height: 200,
         colorDark: "#000000",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
@@ -935,219 +894,156 @@
         showProgressLine("✨ Scannable QR Ready!", 100);
         setTimeout(hideProgressLine, 800);
 
-        const img = qrdiv.querySelector('img');
+        const img = qrdiv.querySelector('img') || qrdiv.querySelector('canvas');
         if (img) {
           const downloadBtn = document.createElement('a');
-          downloadBtn.href = img.src;
+          downloadBtn.href = img.tagName === 'CANVAS' ? img.toDataURL("image/png") : img.src;
           downloadBtn.download = 'Scannable_QRCode.png';
-          downloadBtn.className = 'mt-3 inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-[11px] rounded-lg shadow hover:bg-cyan-300';
-          downloadBtn.innerText = '⬇ Download QR PNG';
+          downloadBtn.className = 'mt-4 inline-block px-5 py-2.5 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-xl shadow hover:bg-cyan-300';
+          downloadBtn.innerText = '⬇ Download HD QR PNG';
           output.appendChild(downloadBtn);
         }
       }, 400);
     }
 
-    async function execVerifyPasswordHash() {
-      const plain = document.getElementById('verifyPlain').value;
-      const hash = document.getElementById('verifyHash').value.trim();
+    function execBgRemover(e) {
+      const file = e.target.files[0];
+      if (!file) return;
       const output = document.getElementById('outputContainer');
+      showProgressLine("Erasing White Background Mask...", 60);
 
-      if (!plain || !hash) return alert('Enter both plain password and hash.');
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width; canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
 
-      showProgressLine("Computing SHA-256 Verification...", 60);
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imgData.data;
 
-      const computedHash = await computeSha256(plain);
-      const isMatch = computedHash.toLowerCase() === hash.toLowerCase();
-
-      showProgressLine("Verification Complete!", 100);
-      setTimeout(hideProgressLine, 800);
-
-      output.innerHTML = `
-        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs ${isMatch ? 'text-emerald-400 border-emerald-500/40' : 'text-rose-500 border-rose-500/40'}">
-          <p class="font-bold text-sm mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
-          <p>• Plain Password: ${plain}</p>
-          <p class="break-all">• Target Hash: ${hash}</p>
-          <p class="break-all">• Computed Hash: ${computedHash}</p>
-        </div>
-      `;
-    }
-
-    function execEmiCalculator() {
-      const p = Number(document.getElementById('emiLoan').value);
-      const r = Number(document.getElementById('emiRate').value) / 12 / 100;
-      const n = Number(document.getElementById('emiTenure').value) * 12;
-      const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      const totalPayable = emi * n;
-      const totalInterest = totalPayable - p;
-
-      document.getElementById('outputContainer').innerHTML = `
-        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-black space-y-1">
-          <p>• Monthly EMI: ₹${emi.toFixed(2)}</p>
-          <p>• Total Interest: ₹${totalInterest.toFixed(2)}</p>
-          <p>• Total Amount Payable: ₹${totalPayable.toFixed(2)}</p>
-        </div>
-      `;
-    }
-
-    function handleFileQueue(e) {
-      filesQueue = Array.from(e.target.files || []);
-      document.getElementById('fileQueueStatus').innerText = `${filesQueue.length} file(s) loaded. Ready to execute.`;
-    }
-
-    async function execFileTask() {
-      if (!filesQueue.length) return alert('Please choose a file first.');
-      const output = document.getElementById('outputContainer');
-      convertedImagesCache = [];
-      output.innerHTML = '';
-
-      if (activeToolId === 'pdf-merge') {
-        try {
-          if (filesQueue.length < 2) return alert('Select at least 2 PDF files to merge.');
-
-          showProgressLine("Merging PDFs...", 30);
-          const { PDFDocument } = PDFLib;
-          const mergedPdf = await PDFDocument.create();
-
-          for (let i = 0; i < filesQueue.length; i++) {
-            const buffer = await filesQueue[i].arrayBuffer();
-            const pdfDoc = await PDFDocument.load(buffer);
-            const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-            copiedPages.forEach((page) => mergedPdf.addPage(page));
-          }
-
-          showProgressLine("Saving Master PDF...", 90);
-          const pdfBytes = await mergedPdf.save();
-          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-          const pdfUrl = URL.createObjectURL(blob);
-
-          showProgressLine("✨ PDFs Merged Successfully!", 100);
-          setTimeout(hideProgressLine, 800);
-
-          output.innerHTML = `
-            <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 text-center">
-              <p class="text-xs text-emerald-500 font-extrabold mb-2">✨ Merged PDF Ready!</p>
-              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 rounded-lg text-xs font-bold shadow">⬇ Download Merged Master PDF</a>
-            </div>
-          `;
-        } catch (err) {
-          hideProgressLine();
-          output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Error: ${err.message}</p>`;
-        }
-      } else if (activeToolId === 'pdf-to-jpg') {
-        try {
-          let totalPages = 0;
-          let parsedPdfs = [];
-
-          showProgressLine("Reading PDF Pages...", 10);
-
-          for (let file of filesQueue) {
-            const buffer = await file.arrayBuffer();
-            const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise;
-            totalPages += pdfDoc.numPages;
-            parsedPdfs.push({ file, pdfDoc });
-          }
-
-          let counter = 0;
-          for (let item of parsedPdfs) {
-            for (let pageNum = 1; pageNum <= item.pdfDoc.numPages; pageNum++) {
-              counter++;
-              const percent = Math.round((counter / totalPages) * 100);
-              showProgressLine(`Rendering Page ${pageNum} of ${item.pdfDoc.numPages}...`, percent);
-
-              const page = await item.pdfDoc.getPage(pageNum);
-              const viewport = page.getViewport({ scale: 1.5 });
-              const canvas = document.createElement('canvas');
-              const ctx = canvas.getContext('2d');
-              canvas.height = viewport.height;
-              canvas.width = viewport.width;
-
-              await page.render({ canvasContext: ctx, viewport }).promise;
-              const imgData = canvas.toDataURL('image/jpeg', 0.9);
-              const imgName = `${item.file.name}_page_${pageNum}.jpg`;
-
-              convertedImagesCache.push({ name: imgName, data: imgData.split(',')[1], url: imgData });
+          for (let i = 0; i < data.length; i += 4) {
+            // Check near-white pixels
+            if (data[i] > 220 && data[i+1] > 220 && data[i+2] > 220) {
+              data[i+3] = 0; // Set Alpha transparent
             }
           }
+          ctx.putImageData(imgData, 0, 0);
+          const transparentUrl = canvas.toDataURL('image/png');
 
-          showProgressLine("✨ Conversion Complete!", 100);
-          setTimeout(hideProgressLine, 800);
+          showProgressLine("Background Removed!", 100);
+          setTimeout(hideProgressLine, 600);
 
           output.innerHTML = `
-            <div class="space-y-3">
-              <button onclick="downloadAllAsZip()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-pink">
-                📦 Download All Pages (ZIP Archive)
-              </button>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                ${convertedImagesCache.map(c => `
-                  <div class="dark:bg-slate-950 bg-slate-100 p-2 rounded-xl border dark:border-white/10 border-slate-400 text-center">
-                    <img src="${c.url}" class="w-full h-20 object-cover rounded mb-1.5" />
-                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-cyan-400 font-bold hover:underline">⬇ Download</a>
-                  </div>
-                `).join('')}
-              </div>
+            <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border border-slate-300 text-center">
+              <img src="${transparentUrl}" class="max-h-48 mx-auto mb-2 rounded bg-checkers" />
+              <a href="${transparentUrl}" download="bg_removed.png" class="px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-lg inline-block">⬇ Download Transparent PNG</a>
             </div>
           `;
-        } catch (err) {
-          hideProgressLine();
-          output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Error: ${err.message}</p>`;
-        }
-      } else {
-        output.innerHTML = '<p class="text-xs text-emerald-500 font-mono">✨ Task executed successfully!</p>';
-      }
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
     }
 
-    function downloadAllAsZip() {
-      if (!convertedImagesCache.length) return;
-      const zip = new JSZip();
-      convertedImagesCache.forEach(img => zip.file(img.name, img.data, { base64: true }));
-      zip.generateAsync({ type: 'blob' }).then(content => saveAs(content, 'Converted_PDF_Pages.zip'));
-    }
-
-    async function execTextTask() {
-      const input = document.getElementById('textInput').value;
+    function execAddWatermark(e) {
+      const file = e.target.files[0];
+      const text = document.getElementById('watermarkText').value || "SmartToolkit PRO";
+      if (!file) return;
       const output = document.getElementById('outputContainer');
 
-      showProgressLine("Processing Text...", 70);
+      showProgressLine("Applying Watermark...", 60);
 
-      if (activeToolId === 'word-counter') {
-        const words = input.trim() ? input.trim().split(/\s+/).length : 0;
-        const chars = input.length;
-        const sentences = input.trim() ? input.split(/[.!?]+/).filter(Boolean).length : 0;
-        
-        showProgressLine("Analytics Computed!", 100);
-        setTimeout(hideProgressLine, 600);
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width; canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
 
-        output.innerHTML = `
-          <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold space-y-1">
-            <p>• Words: ${words}</p>
-            <p>• Characters: ${chars}</p>
-            <p>• Sentences: ${sentences}</p>
-            <p>• Est. Reading Time: ${Math.ceil(words / 200)} min</p>
-          </div>
-        `;
-      } else if (activeToolId === 'password-generator') {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-        let pwd = "";
-        for (let i = 0; i < 16; i++) pwd += chars.charAt(Math.floor(Math.random() * chars.length));
-        const hash = await computeSha256(pwd);
+          ctx.font = `bold ${Math.max(20, Math.floor(img.width / 20))}px sans-serif`;
+          ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+          ctx.textAlign = "right";
+          ctx.fillText(text, canvas.width - 20, canvas.height - 20);
 
-        showProgressLine("Password & Hash Ready!", 100);
-        setTimeout(hideProgressLine, 600);
+          const resultUrl = canvas.toDataURL('image/jpeg');
+          showProgressLine("Watermark Applied!", 100);
+          setTimeout(hideProgressLine, 600);
 
-        output.innerHTML = `
-          <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold space-y-1.5">
-            <p><span class="dark:text-white text-slate-950 font-black">Password:</span> ${pwd}</p>
-            <p class="break-all"><span class="dark:text-white text-slate-950 font-black">SHA-256:</span> ${hash}</p>
-          </div>
-        `;
-      } else {
-        showProgressLine("Task Executed!", 100);
-        setTimeout(hideProgressLine, 600);
-        output.innerHTML = `<pre class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-extrabold">${input}</pre>`;
+          output.innerHTML = `
+            <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border border-slate-300 text-center">
+              <img src="${resultUrl}" class="max-h-48 mx-auto mb-2 rounded" />
+              <a href="${resultUrl}" download="watermarked.jpg" class="px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-lg inline-block">⬇ Download Watermarked Image</a>
+            </div>
+          `;
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function execSipCalc() {
+      const p = Number(document.getElementById('sipMonthly').value);
+      const i = Number(document.getElementById('sipRate').value) / 12 / 100;
+      const n = Number(document.getElementById('sipYears').value) * 12;
+
+      const totalInvested = p * n;
+      const totalWealth = p * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+      const returns = totalWealth - totalInvested;
+
+      document.getElementById('outputContainer').innerHTML = `
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs text-emerald-500 font-bold space-y-1">
+          <p>• Total Invested Amount: ₹${totalInvested.toFixed(2)}</p>
+          <p>• Estimated Wealth Returns: ₹${returns.toFixed(2)}</p>
+          <p>• Total Future Maturity Value: ₹${totalWealth.toFixed(2)}</p>
+        </div>
+      `;
+    }
+
+    function execBmiCalc() {
+      const w = Number(document.getElementById('bmiWeight').value);
+      const h = Number(document.getElementById('bmiHeight').value) / 100;
+      const bmi = w / (h * h);
+
+      let cat = "Normal Weight";
+      if (bmi < 18.5) cat = "Underweight";
+      else if (bmi >= 25 && bmi < 29.9) cat = "Overweight";
+      else if (bmi >= 30) cat = "Obese";
+
+      document.getElementById('outputContainer').innerHTML = `
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs text-cyan-400 font-bold space-y-1">
+          <p>• Your Body Mass Index (BMI): ${bmi.toFixed(1)}</p>
+          <p>• Health Category Status: <span class="text-amber-400">${cat}</span></p>
+        </div>
+      `;
+    }
+
+    function execJsonFormatter() {
+      const raw = document.getElementById('jsonInput').value;
+      const output = document.getElementById('outputContainer');
+      try {
+        const obj = JSON.parse(raw);
+        output.innerHTML = `<pre class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs text-emerald-400 whitespace-pre-wrap">${JSON.stringify(obj, null, 2)}</pre>`;
+      } catch (err) {
+        output.innerHTML = `<p class="text-xs text-rose-500 font-mono">Invalid JSON: ${err.message}</p>`;
       }
     }
 
-    // App Init & Particles
+    function execBase64Encode() {
+      const raw = document.getElementById('base64Input').value;
+      const encoded = btoa(raw);
+      document.getElementById('outputContainer').innerHTML = `
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs text-emerald-400 break-all">
+          Encoded Base64 String:\n${encoded}
+        </div>
+      `;
+    }
+
+    // App Init
     document.getElementById('globalSearchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderToolsCatalog();
