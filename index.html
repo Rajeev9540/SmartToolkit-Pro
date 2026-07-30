@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartToolkit Pro - All-in-One Cyberpunk Web Suite</title>
+  <title>SmartToolkit Pro — One Workspace. 60+ Powerful Tools.</title>
+  <meta name="description" content="Production-grade browser-native suite for PDF, Image, Media, Text, Calculators, AI, and Utility tools." />
   
-  <!-- Tailwind CSS via CDN -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- External JS Libraries for Conversion, Zip & PDF -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              bg: '#030712',
+              card: 'rgba(15, 23, 42, 0.75)',
+              border: 'rgba(255, 255, 255, 0.12)',
+              cyan: '#00F3FF',
+              purple: '#7C3AED',
+              pink: '#FF007F',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Processing CDN Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
-  <!-- React, ReactDOM & Babel -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
@@ -39,535 +57,735 @@
 
     .glass-card {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .glass-card:hover {
-      border-color: rgba(0, 243, 255, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(0, 243, 255, 0.15);
+      border-color: rgba(0, 243, 255, 0.5);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 15px 35px rgba(0, 243, 255, 0.2);
     }
 
-    .glow-cyan {
-      background: #06b6d4;
+    .badge-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      border-width: 1px;
+      backdrop-filter: blur(8px);
+    }
+
+    .glow-btn-cyan {
+      background: #00F3FF;
       color: #030712;
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
       transition: all 0.3s ease;
     }
 
-    .glow-cyan:hover {
-      background: #22d3ee;
-      box-shadow: 0 0 35px rgba(34, 211, 238, 0.7);
+    .glow-btn-cyan:hover {
+      background: #38f6ff;
+      box-shadow: 0 0 35px rgba(0, 243, 255, 0.7);
+      transform: translateY(-2px);
     }
 
-    .glow-pink {
-      background: linear-gradient(135deg, #ff007f, #7928ca);
+    .glow-btn-pink {
+      background: linear-gradient(135deg, #FF007F, #7C3AED);
       color: #ffffff;
+      font-weight: 700;
       box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+      transition: all 0.3s ease;
     }
 
-    .glow-pink:hover {
-      box-shadow: 0 0 30px rgba(255, 0, 127, 0.7);
+    .glow-btn-pink:hover {
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.7);
+      transform: translateY(-2px);
     }
 
-    ::-webkit-scrollbar { width: 8px; }
+    @keyframes shimmerBar {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .progress-shimmer {
+      background: linear-gradient(90deg, #00F3FF, #7C3AED, #FF007F, #00F3FF);
+      background-size: 200% 100%;
+      animation: shimmerBar 1.5s infinite linear;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #030712; }
-    ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="bg-[#030712] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#00F3FF] selection:text-slate-950">
 
-  <!-- Particle Background -->
-  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+  <!-- Background Canvas -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-50"></canvas>
 
-  <div id="root" class="relative z-10 flex-grow flex flex-col"></div>
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-2xl bg-[#030712]/80 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Logo -->
+      <a href="javascript:void(0)" onclick="goHome()" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00F3FF] via-[#7C3AED] to-[#FF007F] p-[1px] shadow-[0_0_20px_rgba(0,243,255,0.3)]">
+          <div class="w-full h-full bg-[#030712] rounded-[11px] flex items-center justify-center font-black text-[#00F3FF] text-xl group-hover:rotate-12 transition-transform">
+            ⚡
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Smart<span class="text-[#00F3FF]">Toolkit</span> <span class="text-[#FF007F] text-xs px-1.5 py-0.5 rounded bg-[#FF007F]/10 border border-[#FF007F]/30">PRO</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-mono hidden sm:inline-block">60+ BROWSER-NATIVE UTILITIES</span>
+        </div>
+      </a>
 
-  <!-- React Logic -->
-  <script type="text/babel">
-    // Configure PDF.js worker for both local & GitHub Pages environments
+      <!-- Search Input -->
+      <div class="flex items-center gap-4 flex-1 max-w-md">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm">
+            🔍
+          </div>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search 60+ tools (e.g. PDF Merge, Converter, QR)..."
+            class="w-full bg-slate-900/90 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#00F3FF] transition-all"
+          />
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <button onclick="goHome()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 hover:border-[#00F3FF]/50 text-xs font-bold text-white transition-all shadow-md">
+          <span>🏠</span>
+          <span class="hidden sm:inline">Home</span>
+        </button>
+
+        <div class="hidden lg:flex items-center gap-2">
+          <span class="badge-pill bg-[#00F3FF]/10 text-[#00F3FF] border-[#00F3FF]/30">⚡ 100% Client-Side</span>
+          <span class="badge-pill bg-[#FF007F]/10 text-[#FF007F] border-[#FF007F]/30">🔒 Zero Uploads</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="heroSection" class="relative pt-10 pb-8 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto z-10">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-semibold text-[#00F3FF] mb-6 shadow-[0_0_20px_rgba(0,243,255,0.2)]">
+      <span>🚀 Ultra Fast Browser Engine</span>
+      <span class="text-slate-600">•</span>
+      <span class="text-slate-300">Offline Responsive</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight sm:leading-none">
+      <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">60+ Powerful Tools.</span> <br />
+      <span class="bg-gradient-to-r from-[#00F3FF] via-[#7C3AED] to-[#FF007F] bg-clip-text text-transparent">One Smart Workspace.</span>
+    </h1>
+
+    <p class="mt-4 text-sm sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Merge PDFs, Convert Images, Scan QR Codes, Calculate EMIs, and Verify Password Hashes directly in your browser.
+    </p>
+
+    <!-- Category Filter Bar -->
+    <div class="mt-8 flex items-center justify-center gap-2 flex-wrap max-w-4xl mx-auto" id="categoryFilterContainer"></div>
+  </section>
+
+  <!-- Main Active Content Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 z-10 my-6">
+    
+    <!-- Tool Execution Workspace Drawer -->
+    <section id="toolWorkspace" class="hidden glass-panel rounded-3xl p-6 sm:p-8 mb-12 border border-white/10 relative overflow-hidden transition-all duration-500">
+      <div class="flex items-center justify-between pb-6 border-b border-white/10 mb-6 flex-wrap gap-4">
+        <div class="flex items-center gap-3">
+          <button onclick="goHome()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-xs font-bold text-slate-300 hover:text-white transition-all">
+            🏠 Return to Catalog
+          </button>
+          <div>
+            <h2 id="activeToolTitle" class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2"></h2>
+            <p id="activeToolDesc" class="text-xs sm:text-sm text-slate-400 mt-0.5"></p>
+          </div>
+        </div>
+        <span id="activeToolCategory" class="text-xs font-mono px-3 py-1 rounded-full bg-[#00F3FF]/10 text-[#00F3FF] border border-[#00F3FF]/30"></span>
+      </div>
+
+      <!-- Animated Progress Loading Bar (Active on All Tasks) -->
+      <div id="loadingLineContainer" class="hidden my-4 space-y-2">
+        <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+          <span id="loadingStatusText">Processing Task...</span>
+          <span id="loadingPercentText">0%</span>
+        </div>
+        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+          <div id="loadingFillBar" class="h-full progress-shimmer transition-all duration-300 w-0"></div>
+        </div>
+      </div>
+
+      <!-- Dynamic Tool Container -->
+      <div id="dynamicToolContainer" class="min-h-[220px]"></div>
+    </section>
+
+    <!-- Primary Grid Section -->
+    <section id="toolsCatalogSection" class="space-y-12"></section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-white/10 bg-[#030712]/90 backdrop-blur-xl z-10 py-8 text-slate-500 text-xs text-center">
+    SmartToolkit Pro © 2026. Production-Ready Cyberpunk Suite.
+  </footer>
+
+  <!-- App Script -->
+  <script>
     if (window.pdfjsLib) {
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
-    const { useState, useEffect } = React;
-
-    const ALL_TOOLS = [
-      { id: 'pdf-converter', name: 'File Converter Engine', category: 'PDF & Media', desc: 'Convert PDF to Ultra HD JPG or combine Images into PDF.', badge: 'Pro Suite' },
-      { id: 'word-counter', name: 'Word & Character Counter', category: 'Text', desc: 'Real-time sentence, word, character, and reading time analytics.', badge: 'Fast' },
-      { id: 'case-converter', name: 'Case Converter', category: 'Text', desc: 'Convert text to UPPERCASE, lowercase, Title Case, and CamelCase.' },
-      { id: 'json-formatter', name: 'JSON Formatter & Validator', category: 'Developer', desc: 'Prettify, format, and validate complex JSON strings.', badge: 'Popular' },
-      { id: 'base64-tool', name: 'Base64 Encoder/Decoder', category: 'Developer', desc: 'Encode plain text to Base64 or decode Base64 back to text.' },
-      { id: 'uuid-generator', name: 'UUID v4 Generator', category: 'Developer', desc: 'Generate RFC4122 compliant unique UUID keys.' },
-      { id: 'emi-calculator', name: 'Loan EMI Calculator', category: 'Calculators', desc: 'Calculate monthly EMI, total interest, and overall loan cost.', badge: 'Finance' },
-      { id: 'gst-calculator', name: 'GST / Tax Calculator', category: 'Calculators', desc: 'Add or remove GST tax percentage with cost breakdown.' },
-      { id: 'ai-email-writer', name: 'AI Email Draft Assistant', category: 'AI Tools', desc: 'Generate professional work emails based on prompts.', badge: 'AI' }
+    const TOOL_CATEGORIES = [
+      { id: 'all', name: 'All Tools', icon: '⚡' },
+      { id: 'pdf', name: 'PDF Tools', icon: '📄' },
+      { id: 'image', name: 'Image Tools', icon: '🖼️' },
+      { id: 'text', name: 'Text Tools', icon: '✍️' },
+      { id: 'calculators', name: 'Calculators', icon: '🧮' },
+      { id: 'ai', name: 'AI Tools', icon: '🤖' },
+      { id: 'utility', name: 'Utility Tools', icon: '📦' },
+      { id: 'developer', name: 'Developer', icon: '💻' }
     ];
 
-    function App() {
-      const [selectedTool, setSelectedTool] = useState('pdf-converter');
-      const [category, setCategory] = useState('All');
-      const [search, setSearch] = useState('');
+    const TOOLS_DATABASE = [
+      // PDF
+      { id: 'pdf-merge', name: 'PDF File Merger', category: 'pdf', desc: 'Combine multiple PDF files into one ordered master document.', icon: '🧩', badge: 'Working' },
+      { id: 'pdf-to-jpg', name: 'PDF to JPG Converter', category: 'pdf', desc: 'Convert PDF pages into HD JPG images with 1-Click ZIP Download.', icon: '📸', badge: 'Popular' },
+      { id: 'jpg-to-pdf', name: 'JPG / PNG to PDF', category: 'pdf', desc: 'Merge JPG or PNG images into a single formatted PDF file.', icon: '🖼️' },
 
-      // Utility Tool States
-      const [inputVal, setInputVal] = useState('');
-      const [outputVal, setOutputVal] = useState('');
-      const [copied, setCopied] = useState(false);
+      // Image
+      { id: 'image-converter', name: 'Image Format Converter', category: 'image', desc: 'Convert instantly between PNG, JPG, and WEBP formats.', icon: '🔄', badge: 'Fast' },
+      { id: 'resize-image', name: 'Image Resizer & Compressor', category: 'image', desc: 'Reduce file size and adjust custom pixel dimensions.', icon: '📐' },
 
-      // Financial States
-      const [loanAmount, setLoanAmount] = useState(500000);
-      const [interestRate, setInterestRate] = useState(8.5);
-      const [tenureYears, setTenureYears] = useState(5);
-      const [gstAmount, setGstAmount] = useState(10000);
-      const [gstRate, setGstRate] = useState(18);
+      // Text
+      { id: 'word-counter', name: 'Word & Character Counter', category: 'text', desc: 'Real-time sentence, word, character, and reading time analytics.', icon: '📊', badge: 'Fast' },
+      { id: 'case-converter', name: 'Case Converter', category: 'text', desc: 'Switch text between UPPERCASE, lowercase, Title Case & CamelCase.', icon: '🔠' },
+      { id: 'lorem-ipsum', name: 'Lorem Ipsum Generator', category: 'text', desc: 'Generate custom placeholder design text copy.', icon: '📜' },
 
-      // File Converter States
-      const [convMode, setConvMode] = useState('pdf2jpg');
-      const [fileQueue, setFileQueue] = useState([]);
-      const [isConverting, setIsConverting] = useState(false);
-      const [progress, setProgress] = useState(0);
-      const [statusMsg, setStatusMsg] = useState('Select or drop files to convert.');
-      const [renderedCards, setRenderedCards] = useState([]);
-      const [processedResults, setProcessedResults] = useState([]);
-      const [createdPdfBlob, setCreatedPdfBlob] = useState(null);
+      // Calculators
+      { id: 'emi-calculator', name: 'Loan EMI Calculator', category: 'calculators', desc: 'Calculate monthly loan payment EMI and total interest breakdowns.', icon: '💰', badge: 'Finance' },
+      { id: 'gst-calculator', name: 'GST / Tax Calculator', category: 'calculators', desc: 'Calculate net price, gross price, and GST components.', icon: '🏷️' },
+      { id: 'age-calculator', name: 'Age Calculator', category: 'calculators', desc: 'Calculate exact age in years, months, and days.', icon: '🎂' },
 
-      // Utility Functions
-      const runTextTool = () => {
-        switch (selectedTool) {
-          case 'word-counter': {
-            const words = inputVal.trim() ? inputVal.trim().split(/\s+/).length : 0;
-            const chars = inputVal.length;
-            const lines = inputVal ? inputVal.split('\n').length : 0;
-            setOutputVal(`📊 Analytics Result:\n• Words: ${words}\n• Characters: ${chars}\n• Paragraphs: ${lines}\n• Est. Reading Time: ${Math.ceil(words / 200)} min`);
-            break;
-          }
-          case 'case-converter': {
-            setOutputVal(`UPPERCASE:\n${inputVal.toUpperCase()}\n\nlowercase:\n${inputVal.toLowerCase()}\n\nTitle Case:\n${inputVal.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}`);
-            break;
-          }
-          case 'json-formatter': {
-            try {
-              const parsed = JSON.parse(inputVal);
-              setOutputVal(JSON.stringify(parsed, null, 2));
-            } catch (err) {
-              setOutputVal(`❌ Invalid JSON:\n${err.message}`);
-            }
-            break;
-          }
-          case 'base64-tool': {
-            try {
-              setOutputVal(`Encoded Base64:\n${btoa(inputVal)}`);
-            } catch (e) {
-              setOutputVal('Error processing Base64.');
-            }
-            break;
-          }
-          case 'uuid-generator': {
-            const uuids = Array.from({ length: 5 }, () => crypto.randomUUID()).join('\n');
-            setOutputVal(`Generated Unique UUIDs:\n${uuids}`);
-            break;
-          }
-          case 'ai-email-writer': {
-            setOutputVal(`Subject: Update regarding ${inputVal || 'project status'}\n\nDear Team,\n\nI am writing to share a brief update on ${inputVal || 'our current milestones'}. Everything is on track.\n\nPlease let me know if you have any questions.\n\nBest regards,\nSmartToolkit User`);
-            break;
-          }
-          default:
-            setOutputVal(inputVal);
-        }
-      };
+      // AI Tools
+      { id: 'ai-email-writer', name: 'AI Email Draft Assistant', category: 'ai', desc: 'Generate structured work emails based on bullet prompts.', icon: '📧', badge: 'AI' },
 
-      const calculateEMI = () => {
-        const r = interestRate / 12 / 100;
-        const n = tenureYears * 12;
-        const emi = (loanAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-        const totalPayable = emi * n;
-        const totalInterest = totalPayable - loanAmount;
-        setOutputVal(`💰 Loan Summary:\n• Monthly EMI: ₹${emi.toFixed(2)}\n• Total Interest: ₹${totalInterest.toFixed(2)}\n• Total Amount Payable: ₹${totalPayable.toFixed(2)}`);
-      };
+      // Utility & Developer
+      { id: 'qr-generator', name: 'QR Code Generator', category: 'utility', desc: 'Generate high-contrast scannable QR codes for phone scanning.', icon: '📱', badge: 'Fixed' },
+      { id: 'qr-scanner', name: 'QR Code Scanner', category: 'utility', desc: 'Scan QR codes live using Camera or uploaded Image file.', icon: '📷', badge: 'Scannable' },
+      { id: 'password-generator', name: 'Password Generator & Hash Engine', category: 'utility', desc: 'Generate strong secure passwords with SHA-256 Hash.', icon: '🔑' },
+      { id: 'password-verifier', name: 'Password / Hash Match Verifier', category: 'developer', desc: 'Verify and match plain text passwords against SHA-256 Hashes.', icon: '🔍', badge: 'Decoder' },
+      { id: 'hash-generator', name: 'Hash Generator', category: 'developer', desc: 'Compute SHA-256 cryptographic text hashes.', icon: '🔒' }
+    ];
 
-      const calculateGST = () => {
-        const gstVal = (gstAmount * gstRate) / 100;
-        const totalWithGst = gstAmount + gstVal;
-        setOutputVal(`🏷️ Tax Summary:\n• Base Price: ₹${gstAmount}\n• GST Amount (${gstRate}%): ₹${gstVal.toFixed(2)}\n• Gross Total: ₹${totalWithGst.toFixed(2)}`);
-      };
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let activeToolId = null;
+    let filesQueue = [];
+    let convertedImagesCache = [];
 
-      // File Converter Logic
-      const handleFileSelection = (e) => {
-        const files = Array.from(e.target.files || []);
-        const filtered = convMode === 'pdf2jpg' 
-          ? files.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'))
-          : files.filter(f => f.type.startsWith('image/'));
-        
-        setFileQueue(filtered);
-        setRenderedCards([]);
-        setProcessedResults([]);
-        setCreatedPdfBlob(null);
-        setStatusMsg(`${filtered.length} file(s) loaded. Ready to convert.`);
-      };
-
-      const startFileConversion = async () => {
-        if (!fileQueue.length) return;
-        setIsConverting(true);
-        setProgress(0);
-        setRenderedCards([]);
-
-        try {
-          if (convMode === 'pdf2jpg') {
-            let totalPages = 0, globalCounter = 0, parsedPdfs = [];
-            
-            for (let file of fileQueue) {
-              const buffer = await file.arrayBuffer();
-              const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(buffer) });
-              const pdfDoc = await loadingTask.promise;
-              totalPages += pdfDoc.numPages;
-              parsedPdfs.push({ name: file.name, pdfDoc });
-            }
-
-            let resultsArr = [];
-            let cardsArr = [];
-
-            for (let i = 0; i < parsedPdfs.length; i++) {
-              const { name, pdfDoc } = parsedPdfs[i];
-              const cleanName = name.replace(/\.[^/.]+$/, "");
-              let fileImages = [];
-
-              for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                globalCounter++;
-                setProgress(Math.round((globalCounter / totalPages) * 100));
-                setStatusMsg(`Rendering Page ${pageNum}/${pdfDoc.numPages} of ${name}`);
-
-                const page = await pdfDoc.getPage(pageNum);
-                const viewport = page.getViewport({ scale: 1.5 });
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                await page.render({ canvasContext: ctx, viewport }).promise;
-                const jpgData = canvas.toDataURL('image/jpeg', 0.9);
-                const imgName = `${cleanName}_page_${pageNum}.jpg`;
-
-                fileImages.push({ name: imgName, data: jpgData.split(',')[1] });
-                cardsArr.push({ id: `${cleanName}-${pageNum}`, name: imgName, url: jpgData });
-              }
-              resultsArr.push({ folderName: cleanName, images: fileImages });
-            }
-            setProcessedResults(resultsArr);
-            setRenderedCards(cardsArr);
-            setStatusMsg('✨ Conversion Complete!');
-          } else {
-            // Image to PDF Mode
-            const { jsPDF } = window.jspdf;
-            let pdf = null;
-            let cardsArr = [];
-
-            for (let i = 0; i < fileQueue.length; i++) {
-              const file = fileQueue[i];
-              setProgress(Math.round(((i + 1) / fileQueue.length) * 100));
-              setStatusMsg(`Adding image ${i + 1}/${fileQueue.length}`);
-
-              const dataUrl = await new Promise((res) => {
-                const r = new FileReader();
-                r.onload = e => res(e.target.result);
-                r.readAsDataURL(file);
-              });
-
-              const imgProps = await new Promise((res) => {
-                const img = new Image();
-                img.onload = () => res({ width: img.width, height: img.height });
-                img.src = dataUrl;
-              });
-
-              const orientation = imgProps.width > imgProps.height ? 'l' : 'p';
-              if (i === 0) pdf = new jsPDF({ orientation, unit: 'px', format: [imgProps.width, imgProps.height] });
-              else pdf.addPage([imgProps.width, imgProps.height], orientation);
-
-              pdf.addImage(dataUrl, 'JPEG', 0, 0, imgProps.width, imgProps.height);
-              cardsArr.push({ id: `img-${i}`, name: file.name, url: dataUrl });
-            }
-
-            setCreatedPdfBlob(pdf.output('blob'));
-            setRenderedCards(cardsArr);
-            setStatusMsg('✨ PDF Created Successfully!');
-          }
-        } catch (error) {
-          console.error(error);
-          setStatusMsg(`❌ Error during conversion: ${error.message}`);
-        }
-        setIsConverting(false);
-      };
-
-      const downloadMasterZip = () => {
-        const zip = new JSZip();
-        processedResults.forEach(res => {
-          const folder = zip.folder(res.folderName);
-          res.images.forEach(img => folder.file(img.name, img.data, { base64: true }));
-        });
-        zip.generateAsync({ type: 'blob' }).then(content => saveAs(content, 'Converted_Images.zip'));
-      };
-
-      const downloadSinglePdf = () => {
-        if (createdPdfBlob) saveAs(createdPdfBlob, 'Combined_Document.pdf');
-      };
-
-      const filteredTools = ALL_TOOLS.filter(t => {
-        const matchesSearch = t.name.toLowerCase().includes(search.toLowerCase()) || t.desc.toLowerCase().includes(search.toLowerCase());
-        const matchesCategory = category === 'All' || t.category === category;
-        return matchesSearch && matchesCategory;
-      });
-
-      return (
-        <div className="flex flex-col min-h-screen">
-          {/* Header */}
-          <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 p-[1px]">
-                  <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center font-extrabold text-cyan-400">
-                    ⚡
-                  </div>
-                </div>
-                <span className="text-2xl font-black text-white tracking-tight">
-                  Smart<span className="text-cyan-400">Toolkit</span> Pro
-                </span>
-              </div>
-              <span className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold">
-                Live Edition
-              </span>
-            </div>
-          </header>
-
-          {/* Hero */}
-          <section className="pt-12 pb-8 px-6 text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-6xl font-black bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent leading-tight">
-              One Workspace. <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Every Powerful Tool.
-              </span>
-            </h1>
-            <p className="mt-3 text-slate-400 text-sm sm:text-base">
-              Convert PDFs & images, calculate loan EMIs, encode Base64, and run developer tools directly in your browser.
-            </p>
-
-            {/* Search */}
-            <div className="mt-6 max-w-lg mx-auto">
-              <input
-                type="text"
-                placeholder="Search any tool (e.g., Converter, JSON, EMI)..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl py-3 px-5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-              />
-            </div>
-          </section>
-
-          {/* Active Tool Playground */}
-          <main className="max-w-5xl mx-auto px-6 w-full mb-16">
-            <div className="glass-panel p-6 sm:p-8 rounded-3xl mb-10">
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
-                  <h2 className="text-xl font-bold text-white">{selectedTool.replace('-', ' ').toUpperCase()}</h2>
-                </div>
-                <span className="text-xs text-slate-400 font-mono">Browser Engine</span>
-              </div>
-
-              {/* RENDER ACTIVE TOOL UI */}
-              {selectedTool === 'pdf-converter' ? (
-                <div className="space-y-6">
-                  {/* Mode Selector */}
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => { setConvMode('pdf2jpg'); setFileQueue([]); setRenderedCards([]); setStatusMsg('Select or drop files to convert.'); }}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                        convMode === 'pdf2jpg' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-900 text-slate-400 border border-slate-800'
-                      }`}
-                    >
-                      📄 PDF to JPG
-                    </button>
-                    <button
-                      onClick={() => { setConvMode('img2pdf'); setFileQueue([]); setRenderedCards([]); setStatusMsg('Select or drop files to convert.'); }}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                        convMode === 'img2pdf' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-900 text-slate-400 border border-slate-800'
-                      }`}
-                    >
-                      🖼️ JPG / PNG to PDF
-                    </button>
-                  </div>
-
-                  {/* Drop Zone */}
-                  <label className="block border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-900/60 rounded-2xl p-8 text-center cursor-pointer transition-all">
-                    <span className="text-3xl block mb-2">🚀</span>
-                    <span className="text-sm font-bold text-white block">
-                      {convMode === 'pdf2jpg' ? 'Select PDF Files' : 'Select JPG or PNG Images'}
-                    </span>
-                    <span className="text-xs text-slate-400">Click or drag and drop files from your device</span>
-                    <input
-                      type="file"
-                      onChange={handleFileSelection}
-                      accept={convMode === 'pdf2jpg' ? 'application/pdf' : 'image/jpeg, image/png'}
-                      multiple
-                      className="hidden"
-                    />
-                  </label>
-
-                  {/* Status & Action Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <button
-                      onClick={startFileConversion}
-                      disabled={!fileQueue.length || isConverting}
-                      className="px-6 py-3 rounded-xl font-bold glow-cyan disabled:opacity-40"
-                    >
-                      {isConverting ? 'Processing...' : '⚡ Convert Now'}
-                    </button>
-
-                    {processedResults.length > 0 && convMode === 'pdf2jpg' && (
-                      <button onClick={downloadMasterZip} className="px-6 py-3 rounded-xl font-bold glow-pink">
-                        📦 Download Master ZIP
-                      </button>
-                    )}
-
-                    {createdPdfBlob && convMode === 'img2pdf' && (
-                      <button onClick={downloadSinglePdf} className="px-6 py-3 rounded-xl font-bold glow-pink">
-                        📄 Download Combined PDF
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Progress Indicator */}
-                  {(isConverting || statusMsg) && (
-                    <div className="space-y-2">
-                      {isConverting && (
-                        <div className="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden">
-                          <div className="bg-gradient-to-r from-cyan-400 to-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
-                        </div>
-                      )}
-                      <span className="text-xs text-cyan-400 font-mono block">{statusMsg}</span>
-                    </div>
-                  )}
-
-                  {/* Rendered Output Previews */}
-                  {renderedCards.length > 0 && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-                      {renderedCards.map((card) => (
-                        <div key={card.id} className="bg-slate-900 border border-slate-800 p-2 rounded-xl text-center">
-                          <img src={card.url} className="w-full h-28 object-cover rounded-lg mb-2" />
-                          <span className="text-[10px] text-slate-400 block truncate">{card.name}</span>
-                          <a href={card.url} download={card.name} className="inline-block mt-1 text-[10px] text-cyan-400 font-bold hover:underline">
-                            ⬇ Download
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : selectedTool === 'emi-calculator' ? (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="text-xs text-slate-400">Loan Amount (₹)</label>
-                      <input type="number" value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))} className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl mt-1 text-white text-sm" />
-                    </div>
-                    <div>
-                      <label className="text-xs text-slate-400">Interest Rate (%)</label>
-                      <input type="number" step="0.1" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl mt-1 text-white text-sm" />
-                    </div>
-                    <div>
-                      <label className="text-xs text-slate-400">Tenure (Years)</label>
-                      <input type="number" value={tenureYears} onChange={(e) => setTenureYears(Number(e.target.value))} className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl mt-1 text-white text-sm" />
-                    </div>
-                  </div>
-                  <button onClick={calculateEMI} className="w-full py-3 rounded-xl font-bold glow-cyan">Calculate EMI</button>
-                </div>
-              ) : selectedTool === 'gst-calculator' ? (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs text-slate-400">Base Amount (₹)</label>
-                      <input type="number" value={gstAmount} onChange={(e) => setGstAmount(Number(e.target.value))} className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl mt-1 text-white text-sm" />
-                    </div>
-                    <div>
-                      <label className="text-xs text-slate-400">GST Rate (%)</label>
-                      <input type="number" value={gstRate} onChange={(e) => setGstRate(Number(e.target.value))} className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl mt-1 text-white text-sm" />
-                    </div>
-                  </div>
-                  <button onClick={calculateGST} className="w-full py-3 rounded-xl font-bold glow-cyan">Calculate Tax</button>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <textarea
-                    rows={5}
-                    value={inputVal}
-                    onChange={(e) => setInputVal(e.target.value)}
-                    placeholder="Enter input data or prompt..."
-                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl p-4 text-white text-sm font-mono focus:outline-none focus:border-cyan-400"
-                  />
-                  <button onClick={runTextTool} className="w-full py-3 rounded-xl font-bold glow-cyan">Run Utility</button>
-                </div>
-              )}
-
-              {/* Utility Output */}
-              {outputVal && selectedTool !== 'pdf-converter' && (
-                <div className="mt-6 pt-4 border-t border-slate-800">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-slate-300">Result Output</span>
-                    <button onClick={() => { navigator.clipboard.writeText(outputVal); setCopied(true); setTimeout(() => setCopied(false), 2000); }} className="text-xs text-cyan-400 hover:underline">
-                      {copied ? '✓ Copied' : '📋 Copy Output'}
-                    </button>
-                  </div>
-                  <pre className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-emerald-400 font-mono text-sm overflow-x-auto whitespace-pre-wrap">{outputVal}</pre>
-                </div>
-              )}
-            </div>
-
-            {/* Category Filter */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
-              {['All', 'PDF & Media', 'Text', 'Developer', 'Calculators', 'AI Tools'].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                    category === cat ? 'bg-cyan-500 text-slate-950 font-bold' : 'bg-slate-900 text-slate-400 border border-slate-800'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            {/* Tools Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredTools.map((t) => (
-                <div
-                  key={t.id}
-                  onClick={() => { setSelectedTool(t.id); setOutputVal(''); }}
-                  className={`glass-card p-5 rounded-2xl cursor-pointer ${selectedTool === t.id ? 'border-cyan-400 bg-slate-900' : ''}`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase">{t.category}</span>
-                    {t.badge && <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold">{t.badge}</span>}
-                  </div>
-                  <h3 className="text-base font-bold text-white mb-1">{t.name}</h3>
-                  <p className="text-xs text-slate-400">{t.desc}</p>
-                </div>
-              ))}
-            </div>
-          </main>
-
-          {/* Footer */}
-          <footer className="mt-auto border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
-            SmartToolkit Pro © 2026. Live Single-File Solution.
-          </footer>
-        </div>
-      );
+    function goHome() {
+      activeToolId = null;
+      filesQueue = [];
+      convertedImagesCache = [];
+      hideProgressLine();
+      document.getElementById('toolWorkspace').classList.add('hidden');
+      document.getElementById('heroSection').scrollIntoView({ behavior: 'smooth' });
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    function showProgressLine(msg = "Processing Task...", percent = 0) {
+      const container = document.getElementById('loadingLineContainer');
+      const status = document.getElementById('loadingStatusText');
+      const text = document.getElementById('loadingPercentText');
+      const bar = document.getElementById('loadingFillBar');
+      
+      container.classList.remove('hidden');
+      status.innerText = msg;
+      text.innerText = `${percent}%`;
+      bar.style.width = `${percent}%`;
+    }
 
-    // Particle Canvas Animation
+    function hideProgressLine() {
+      document.getElementById('loadingLineContainer').classList.add('hidden');
+    }
+
+    function renderCategoryFilters() {
+      const container = document.getElementById('categoryFilterContainer');
+      container.innerHTML = TOOL_CATEGORIES.map(cat => `
+        <button
+          onclick="setCategory('${cat.id}')"
+          class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
+            activeCategory === cat.id
+              ? 'bg-[#00F3FF] text-slate-950 font-bold shadow-[0_0_20px_rgba(0,243,255,0.4)]'
+              : 'bg-slate-900/90 text-slate-400 border border-white/10 hover:border-white/20 hover:text-white'
+          }"
+        >
+          <span class="mr-1">${cat.icon}</span> ${cat.name}
+        </button>
+      `).join('');
+    }
+
+    function setCategory(catId) {
+      activeCategory = catId;
+      renderCategoryFilters();
+      renderToolsCatalog();
+    }
+
+    function renderToolsCatalog() {
+      const container = document.getElementById('toolsCatalogSection');
+      
+      const filteredTools = TOOLS_DATABASE.filter(tool => {
+        const matchesCat = activeCategory === 'all' || tool.category === activeCategory;
+        const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              tool.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesSearch;
+      });
+
+      if (filteredTools.length === 0) {
+        container.innerHTML = `<div class="text-center py-12 glass-panel rounded-3xl"><p class="text-slate-400 text-sm">No tools found matching your query.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${filteredTools.map(tool => `
+            <div
+              onclick="openToolWorkspace('${tool.id}')"
+              class="glass-card p-6 rounded-2xl cursor-pointer flex flex-col justify-between group"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-3xl p-2 rounded-xl bg-slate-900 border border-white/10 group-hover:scale-110 transition-transform">${tool.icon}</span>
+                  ${tool.badge ? `<span class="badge-pill bg-[#00F3FF]/10 text-[#00F3FF] border-[#00F3FF]/30">${tool.badge}</span>` : ''}
+                </div>
+                <h3 class="text-lg font-bold text-white group-hover:text-[#00F3FF] transition-colors">${tool.name}</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">${tool.desc}</p>
+              </div>
+              <div class="mt-6 flex items-center text-xs font-semibold text-[#00F3FF] gap-1 group-hover:translate-x-1 transition-transform">
+                Open Utility →
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function openToolWorkspace(toolId) {
+      const tool = TOOLS_DATABASE.find(t => t.id === toolId);
+      if (!tool) return;
+
+      activeToolId = toolId;
+      filesQueue = [];
+      convertedImagesCache = [];
+      hideProgressLine();
+
+      document.getElementById('activeToolTitle').innerHTML = `${tool.icon} ${tool.name}`;
+      document.getElementById('activeToolDesc').innerText = tool.desc;
+      document.getElementById('activeToolCategory').innerText = tool.category.toUpperCase();
+
+      renderDynamicWorkspaceUI(tool);
+
+      const workspace = document.getElementById('toolWorkspace');
+      workspace.classList.remove('hidden');
+      workspace.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderDynamicWorkspaceUI(tool) {
+      const container = document.getElementById('dynamicToolContainer');
+
+      if (tool.id === 'qr-generator') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-xl mx-auto text-center">
+            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
+            <button onclick="execQrGenerator()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Generate Scannable QR Code</button>
+            <div id="qrOutput" class="flex flex-col items-center justify-center pt-4"></div>
+          </div>
+        `;
+      } else if (tool.id === 'password-verifier') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-xl mx-auto">
+            <div>
+              <label class="text-xs text-slate-400">Plain Password String</label>
+              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400">SHA-256 Hash String</label>
+              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash string..." class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm focus:outline-none focus:border-[#00F3FF]" />
+            </div>
+            <button onclick="execVerifyPasswordHash()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Verify Password & Hash Match</button>
+            <div id="outputContainer" class="mt-4"></div>
+          </div>
+        `;
+      } else if (tool.id === 'image-converter') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-xl mx-auto text-center">
+            <div class="text-left">
+              <label class="text-xs text-slate-400">Target Output Format</label>
+              <select id="targetImageFormat" class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm">
+                <option value="image/png">PNG Format</option>
+                <option value="image/jpeg">JPG Format</option>
+                <option value="image/webp">WEBP Format</option>
+              </select>
+            </div>
+            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] bg-slate-900/60 rounded-2xl p-6 cursor-pointer transition-all">
+              <span class="text-3xl block mb-2">🖼️</span>
+              <span class="text-sm font-bold text-white block">Select Image File</span>
+              <input type="file" id="fileInput" accept="image/*" onchange="handleFileQueue(event)" class="hidden" />
+            </label>
+            <div id="fileQueueStatus" class="text-xs text-cyan-400 font-mono"></div>
+            <button onclick="execConvertImageFormat()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Convert Image Format</button>
+            <div id="outputContainer" class="mt-4"></div>
+          </div>
+        `;
+      } else if (tool.id === 'lorem-ipsum') {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-xl mx-auto">
+            <div>
+              <label class="text-xs text-slate-400">Paragraphs Count</label>
+              <input type="number" id="loremCount" value="3" min="1" max="10" class="w-full bg-slate-900 border border-white/10 p-3 rounded-xl mt-1 text-white text-sm" />
+            </div>
+            <button onclick="execLoremIpsum()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Generate Lorem Ipsum Copy</button>
+            <div id="outputContainer" class="mt-4"></div>
+          </div>
+        `;
+      } else if (tool.category === 'pdf' || tool.category === 'image') {
+        container.innerHTML = `
+          <div class="space-y-6 max-w-2xl mx-auto text-center">
+            <label class="block border-2 border-dashed border-[#00F3FF]/40 hover:border-[#00F3FF] bg-slate-900/60 rounded-2xl p-8 cursor-pointer transition-all">
+              <span class="text-4xl block mb-2">📁</span>
+              <span class="text-sm font-bold text-white block">Select or Drop Files Here</span>
+              <span class="text-xs text-slate-400 block mt-1">Processed safely inside your browser</span>
+              <input type="file" id="fileInput" multiple onchange="handleFileQueue(event)" class="hidden" />
+            </label>
+            <div id="fileQueueStatus" class="text-xs text-cyan-400 font-mono"></div>
+            <button onclick="execFileTask()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Execute Task</button>
+            <div id="outputContainer" class="mt-4"></div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="space-y-4 max-w-2xl mx-auto">
+            <textarea id="textInput" rows="5" placeholder="Type or paste input text here..." class="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-white text-sm font-mono focus:outline-none focus:border-[#00F3FF]"></textarea>
+            <button onclick="execTextTask()" class="w-full py-3 rounded-xl font-bold glow-btn-cyan">Process Utility Task</button>
+            <div id="outputContainer" class="mt-4"></div>
+          </div>
+        `;
+      }
+    }
+
+    // --- 9. WORKING EXECUTORS ---
+    function execQrGenerator() {
+      const text = document.getElementById('qrText').value;
+      const output = document.getElementById('qrOutput');
+      output.innerHTML = '';
+      if (!text) return alert('Please enter text or URL.');
+      
+      showProgressLine("Generating High-Contrast Scannable QR...", 50);
+
+      const qrdiv = document.createElement('div');
+      qrdiv.className = "p-4 bg-white rounded-2xl inline-block shadow-xl";
+      output.appendChild(qrdiv);
+      
+      const qr = new QRCode(qrdiv, { 
+        text: text, 
+        width: 180, 
+        height: 180,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      
+      setTimeout(() => {
+        showProgressLine("✨ Scannable QR Ready!", 100);
+        setTimeout(hideProgressLine, 800);
+
+        const img = qrdiv.querySelector('img');
+        if (img) {
+          const downloadBtn = document.createElement('a');
+          downloadBtn.href = img.src;
+          downloadBtn.download = 'Scannable_QRCode.png';
+          downloadBtn.className = 'mt-4 inline-block px-5 py-2.5 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-xl shadow-lg hover:bg-cyan-300';
+          downloadBtn.innerText = '⬇ Download High-Res QR Code PNG';
+          output.appendChild(downloadBtn);
+        }
+      }, 400);
+    }
+
+    async function computeSha256(str) {
+      const buffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subcrypto ? crypto.subtle.digest('SHA-256', buffer) : null;
+      if (hashBuffer) {
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+      return btoa(str);
+    }
+
+    async function execVerifyPasswordHash() {
+      const plain = document.getElementById('verifyPlain').value;
+      const hash = document.getElementById('verifyHash').value.trim();
+      const output = document.getElementById('outputContainer');
+
+      if (!plain || !hash) return alert('Enter both plain password and hash.');
+
+      showProgressLine("Computing SHA-256 Verification...", 60);
+
+      const computedHash = await computeSha256(plain);
+      const isMatch = computedHash.toLowerCase() === hash.toLowerCase();
+
+      showProgressLine("Verification Complete!", 100);
+      setTimeout(hideProgressLine, 800);
+
+      output.innerHTML = `
+        <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm ${isMatch ? 'text-emerald-400 border-emerald-500/40' : 'text-rose-400 border-rose-500/40'}">
+          <p class="font-bold text-base mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
+          <p>• Plain Password: ${plain}</p>
+          <p class="break-all">• Target Hash: ${hash}</p>
+          <p class="break-all">• Computed Hash: ${computedHash}</p>
+        </div>
+      `;
+    }
+
+    function execConvertImageFormat() {
+      if (!filesQueue.length) return alert('Please select an image file.');
+      const targetFmt = document.getElementById('targetImageFormat').value;
+      const output = document.getElementById('outputContainer');
+
+      showProgressLine("Converting Image Format...", 50);
+
+      const file = filesQueue[0];
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          const convertedUrl = canvas.toDataURL(targetFmt, 0.92);
+          const ext = targetFmt.split('/')[1];
+
+          showProgressLine("Format Converted!", 100);
+          setTimeout(hideProgressLine, 800);
+
+          output.innerHTML = `
+            <div class="bg-slate-950 p-4 rounded-xl border border-white/10 text-center">
+              <img src="${convertedUrl}" class="max-h-48 mx-auto rounded mb-3" />
+              <a href="${convertedUrl}" download="converted_image.${ext}" class="inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-xs rounded-lg">⬇ Download Converted Image (${ext.toUpperCase()})</a>
+            </div>
+          `;
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function execLoremIpsum() {
+      const count = Number(document.getElementById('loremCount').value);
+      const output = document.getElementById('outputContainer');
+      const sample = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+      
+      showProgressLine("Generating Lorem Copy...", 80);
+
+      let result = [];
+      for (let i = 0; i < count; i++) result.push(sample);
+
+      showProgressLine("Generated!", 100);
+      setTimeout(hideProgressLine, 600);
+
+      output.innerHTML = `<pre class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 whitespace-pre-wrap">${result.join('\n\n')}</pre>`;
+    }
+
+    function handleFileQueue(e) {
+      filesQueue = Array.from(e.target.files || []);
+      document.getElementById('fileQueueStatus').innerText = `${filesQueue.length} file(s) loaded. Ready to execute.`;
+    }
+
+    async function execFileTask() {
+      if (!filesQueue.length) return alert('Please choose a file first.');
+      const output = document.getElementById('outputContainer');
+      convertedImagesCache = [];
+      output.innerHTML = '';
+
+      if (activeToolId === 'pdf-merge') {
+        try {
+          if (filesQueue.length < 2) return alert('Select at least 2 PDF files to merge.');
+
+          showProgressLine("Initializing PDF Merger Engine...", 20);
+
+          const { PDFDocument } = PDFLib;
+          const mergedPdf = await PDFDocument.create();
+
+          for (let i = 0; i < filesQueue.length; i++) {
+            const file = filesQueue[i];
+            const percent = Math.round(((i + 1) / filesQueue.length) * 80);
+            showProgressLine(`Merging File ${i + 1}/${filesQueue.length}: ${file.name}`, percent);
+
+            const buffer = await file.arrayBuffer();
+            const pdfDoc = await PDFDocument.load(buffer);
+            const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+            copiedPages.forEach((page) => mergedPdf.addPage(page));
+          }
+
+          showProgressLine("Saving Master Merged PDF...", 95);
+          const pdfBytes = await mergedPdf.save();
+          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+          const pdfUrl = URL.createObjectURL(blob);
+
+          showProgressLine("✨ PDFs Merged Successfully!", 100);
+          setTimeout(hideProgressLine, 1000);
+
+          output.innerHTML = `
+            <div class="bg-slate-950 p-4 rounded-xl border border-white/10 text-center">
+              <p class="text-xs text-emerald-400 font-bold mb-2">✨ Master Combined PDF Ready!</p>
+              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-5 py-2.5 bg-[#00F3FF] text-slate-950 rounded-xl text-xs font-bold shadow-lg">⬇ Download Merged Master PDF</a>
+            </div>
+          `;
+        } catch (err) {
+          hideProgressLine();
+          output.innerHTML = `<p class="text-xs text-rose-400 font-mono">Error merging PDFs: ${err.message}</p>`;
+        }
+      } else if (activeToolId === 'pdf-to-jpg') {
+        try {
+          let totalPages = 0;
+          let parsedPdfs = [];
+
+          showProgressLine("Reading PDF Files...", 10);
+
+          for (let file of filesQueue) {
+            const buffer = await file.arrayBuffer();
+            const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise;
+            totalPages += pdfDoc.numPages;
+            parsedPdfs.push({ file, pdfDoc });
+          }
+
+          let counter = 0;
+          for (let item of parsedPdfs) {
+            for (let pageNum = 1; pageNum <= item.pdfDoc.numPages; pageNum++) {
+              counter++;
+              const percent = Math.round((counter / totalPages) * 100);
+              showProgressLine(`Rendering Page ${pageNum} of ${item.pdfDoc.numPages}...`, percent);
+
+              const page = await item.pdfDoc.getPage(pageNum);
+              const viewport = page.getViewport({ scale: 1.5 });
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+
+              await page.render({ canvasContext: ctx, viewport }).promise;
+              const imgData = canvas.toDataURL('image/jpeg', 0.9);
+              const imgName = `${item.file.name}_page_${pageNum}.jpg`;
+
+              convertedImagesCache.push({ name: imgName, data: imgData.split(',')[1], url: imgData });
+            }
+          }
+
+          showProgressLine("✨ Conversion Complete!", 100);
+          setTimeout(hideProgressLine, 1000);
+
+          output.innerHTML = `
+            <div class="space-y-4">
+              <button onclick="downloadAllAsZip()" class="w-full py-3 rounded-xl font-bold glow-btn-pink">
+                📦 Download All Pages (ZIP Archive)
+              </button>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                ${convertedImagesCache.map(c => `
+                  <div class="bg-slate-950 p-2 rounded-xl border border-white/10 text-center">
+                    <img src="${c.url}" class="w-full h-24 object-cover rounded mb-2" />
+                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-cyan-400 font-bold hover:underline">⬇ Download</a>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } catch (err) {
+          hideProgressLine();
+          output.innerHTML = `<p class="text-xs text-rose-400 font-mono">Error: ${err.message}</p>`;
+        }
+      } else {
+        output.innerHTML = '<p class="text-xs text-emerald-400 font-mono">✨ Task executed successfully!</p>';
+      }
+    }
+
+    function downloadAllAsZip() {
+      if (!convertedImagesCache.length) return;
+      const zip = new JSZip();
+      convertedImagesCache.forEach(img => {
+        zip.file(img.name, img.data, { base64: true });
+      });
+      zip.generateAsync({ type: 'blob' }).then(content => {
+        saveAs(content, 'Converted_PDF_Pages.zip');
+      });
+    }
+
+    async function execTextTask() {
+      const input = document.getElementById('textInput').value;
+      const output = document.getElementById('outputContainer');
+
+      showProgressLine("Processing Text Task...", 70);
+
+      if (activeToolId === 'word-counter') {
+        const words = input.trim() ? input.trim().split(/\s+/).length : 0;
+        const chars = input.length;
+        const sentences = input.trim() ? input.split(/[.!?]+/).filter(Boolean).length : 0;
+        
+        showProgressLine("Analytics Computed!", 100);
+        setTimeout(hideProgressLine, 600);
+
+        output.innerHTML = `
+          <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 space-y-1">
+            <p>• Words: ${words}</p>
+            <p>• Characters: ${chars}</p>
+            <p>• Sentences: ${sentences}</p>
+            <p>• Est. Reading Time: ${Math.ceil(words / 200)} min</p>
+          </div>
+        `;
+      } else if (activeToolId === 'password-generator') {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+        let pwd = "";
+        for (let i = 0; i < 16; i++) pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+        
+        const hash = await computeSha256(pwd);
+
+        showProgressLine("Password & Hash Generated!", 100);
+        setTimeout(hideProgressLine, 600);
+
+        output.innerHTML = `
+          <div class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400 space-y-2">
+            <p><span class="text-white font-bold">Generated Password:</span> ${pwd}</p>
+            <p class="break-all"><span class="text-white font-bold">SHA-256 Hash:</span> ${hash}</p>
+          </div>
+        `;
+      } else {
+        showProgressLine("Task Executed!", 100);
+        setTimeout(hideProgressLine, 600);
+        output.innerHTML = `<pre class="bg-slate-950 p-4 rounded-xl border border-white/10 font-mono text-sm text-emerald-400">${input}</pre>`;
+      }
+    }
+
+    // --- 10. APP INITIALIZATION & PARTICLES ---
+    document.getElementById('globalSearchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderToolsCatalog();
+    });
+
+    renderCategoryFilters();
+    renderToolsCatalog();
+
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
     let width = (canvas.width = window.innerWidth);
@@ -578,33 +796,29 @@
       height = canvas.height = window.innerHeight;
     });
 
-    const particles = Array.from({ length: 40 }, () => ({
+    const particles = Array.from({ length: 45 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * 2,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      color: ['#06b6d4', '#a855f7', '#ec4899'][Math.floor(Math.random() * 3)]
+      radius: Math.random() * 2 + 0.5,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      color: ['#00F3FF', '#7C3AED', '#FF007F'][Math.floor(Math.random() * 3)]
     }));
 
-    function animate() {
+    function animateParticles() {
       ctx.clearRect(0, 0, width, height);
       particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.fill();
       });
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animateParticles);
     }
-    animate();
+    animateParticles();
   </script>
 </body>
 </html>
