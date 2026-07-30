@@ -6,6 +6,9 @@
   <title>SmartToolkit Pro — One Workspace. 60+ Powerful Tools.</title>
   <meta name="description" content="Production-grade browser-native suite for PDF, Image, Media, Text, Calculators, AI, and Utility tools." />
   
+  <!-- Exact Same High-Resolution Multi-Color Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='neonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300F3FF'/%3E%3Cstop offset='50%25' stop-color='%237C3AED'/%3E%3Cstop offset='100%25' stop-color='%23FF007F'/%3E%3C/linearGradient%3E%3ClinearGradient id='boltGrad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFE600'/%3E%3Cstop offset='100%25' stop-color='%23FF5500'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='3' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%23090d16'/%3E%3Crect x='4' y='4' width='92' height='92' rx='20' fill='none' stroke='url(%23neonGrad)' stroke-width='6' opacity='0.95'/%3E%3Cpath d='M 58 10 L 22 52 L 48 52 L 38 90 L 78 42 L 52 42 Z' fill='url(%23boltGrad)' filter='url(%23glow)' stroke='%23FFFFFF' stroke-width='1.5'/%3E%3C/svg%3E">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -15,7 +18,7 @@
         extend: {
           colors: {
             cyber: {
-              bg: '#030712',
+              bg: '#090d16',
               card: 'rgba(15, 23, 42, 0.75)',
               border: 'rgba(255, 255, 255, 0.12)',
               cyan: '#00F3FF',
@@ -46,19 +49,25 @@
       overflow-x: hidden;
     }
 
-    /* Dark Mode Styling */
+    /* Cyberpunk Mesh Background for Dark Mode */
     html.dark body {
-      background-color: #030712;
-      background-image: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 70%),
-                        radial-gradient(circle at 80% 50%, rgba(0, 243, 255, 0.1), transparent 60%);
+      background-color: #090d16;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 243, 255, 0.22) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(255, 0, 127, 0.18) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+      background-attachment: fixed;
       color: #f3f4f6;
     }
 
     /* Light Mode Styling */
     html:not(.dark) body {
       background-color: #e2e8f0;
-      background-image: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.08), transparent 70%),
-                        radial-gradient(circle at 20% 50%, rgba(0, 243, 255, 0.08), transparent 60%);
+      background-image: 
+        radial-gradient(at 50% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 70%),
+        radial-gradient(at 20% 50%, rgba(0, 243, 255, 0.1) 0px, transparent 60%);
+      background-attachment: fixed;
       color: #020617;
     }
 
@@ -69,26 +78,65 @@
     html.dark .bg-brand-accent { background-color: #00F3FF; color: #030712; }
     html:not(.dark) .bg-brand-accent { background-color: #020617; color: #ffffff; }
 
+    /* Animated Logo Styles */
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(0, 243, 255, 0.5), 0 0 30px rgba(124, 58, 237, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(255, 0, 127, 0.7), 0 0 45px rgba(0, 243, 255, 0.6); }
+    }
+
+    .animated-logo-box {
+      animation: logoPulse 3s infinite ease-in-out;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .group:hover .animated-logo-box {
+      transform: scale(1.1) rotate(6deg);
+    }
+
+    .group:hover .logo-icon-spin {
+      transform: rotate(360deg);
+      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Colorful Search Bar Outer Frame Animation */
+    @keyframes rainbowBorder {
+      0% { border-color: #00F3FF; box-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+      33% { border-color: #7C3AED; box-shadow: 0 0 15px rgba(124, 58, 237, 0.3); }
+      66% { border-color: #FF007F; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); }
+      100% { border-color: #00F3FF; box-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+    }
+
+    .colorful-search-wrap {
+      border: 2px solid #00F3FF;
+      animation: rainbowBorder 6s infinite linear;
+      transition: all 0.3s ease;
+    }
+
+    .colorful-search-wrap:hover {
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+      transform: scale(1.01);
+    }
+
     /* Glass Panels */
     html.dark .glass-panel {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     }
 
     html:not(.dark) .glass-panel {
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(15, 23, 42, 0.2);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     }
 
     /* Dark Cards & Text for Light Mode */
     html.dark .glass-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
@@ -97,7 +145,7 @@
       background: #cbd5e1;
       backdrop-filter: blur(16px);
       border: 1px solid #94a3b8;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .glass-card {
@@ -105,9 +153,9 @@
     }
 
     .glass-card:hover {
-      border-color: #7C3AED;
+      border-color: rgba(0, 243, 255, 0.9);
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 30px rgba(124, 58, 237, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 243, 255, 0.25);
     }
 
     .badge-pill {
@@ -172,7 +220,7 @@
     }
 
     .progress-shimmer {
-      background: linear-gradient(90deg, #7C3AED, #FF007F, #7C3AED);
+      background: linear-gradient(90deg, #00F3FF, #7C3AED, #FF007F, #00F3FF);
       background-size: 200% 100%;
       animation: shimmerBar 1.5s infinite linear;
     }
@@ -182,42 +230,45 @@
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-[#7C3AED] selection:text-white">
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#00F3FF] selection:text-slate-950">
 
-  <!-- Canvas Particles -->
+  <!-- Background Particle Canvas -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
   <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 backdrop-blur-2xl dark:bg-[#030712]/80 bg-white/90 border-b dark:border-white/10 border-slate-300">
+  <header class="sticky top-0 z-50 backdrop-blur-2xl dark:bg-[#090d16]/80 bg-white/90 border-b dark:border-white/10 border-slate-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
       
-      <!-- Logo -->
+      <!-- Logo Home Trigger (Matched with Favicon Design) -->
       <a href="javascript:void(0)" onclick="goHome()" class="flex items-center gap-2 sm:gap-3 shrink-0 group">
-        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#7C3AED] via-[#FF007F] to-[#7C3AED] p-[1px] shadow-[0_0_20px_rgba(124,58,237,0.3)]">
-          <div class="w-full h-full dark:bg-[#030712] bg-white rounded-[11px] flex items-center justify-center font-black text-brand-accent text-lg sm:text-xl group-hover:rotate-12 transition-transform">
-            ⚡
+        <div class="animated-logo-box w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#00F3FF] via-[#7C3AED] to-[#FF007F] p-[2px] cursor-pointer shadow-lg">
+          <div class="w-full h-full dark:bg-[#090d16] bg-slate-950 rounded-[14px] flex items-center justify-center font-black text-amber-300 text-lg sm:text-xl">
+            <span class="logo-icon-spin inline-block drop-shadow-[0_0_8px_rgba(255,230,0,0.8)]">⚡</span>
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="text-lg sm:text-2xl font-black dark:text-white text-slate-900 tracking-tight">
+          <span class="text-lg sm:text-2xl font-black dark:text-white text-slate-900 tracking-tight flex items-center gap-1">
             Smart<span class="text-brand-accent">Toolkit</span> <span class="text-[#FF007F] text-[10px] sm:text-xs px-1.5 py-0.5 rounded bg-[#FF007F]/10 border border-[#FF007F]/30">PRO</span>
           </span>
           <span class="text-[9px] sm:text-[10px] dark:text-slate-400 text-slate-600 font-mono hidden sm:inline-block">60+ BROWSER-NATIVE UTILITIES</span>
         </div>
       </a>
 
-      <!-- Search Input -->
-      <div class="flex items-center gap-4 flex-1 max-w-md">
-        <div class="relative w-full">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">
+      <!-- Animated Colorful Search Bar -->
+      <div class="flex items-center gap-4 flex-1 max-w-lg">
+        <div class="colorful-search-wrap relative w-full rounded-2xl p-[1px] bg-slate-900/80">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#00F3FF] text-sm">
             🔍
           </div>
           <input
             type="text"
             id="globalSearchInput"
-            placeholder="Search 60+ tools (e.g. PDF, Converter, QR)..."
-            class="w-full dark:bg-slate-900/90 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl py-2 pl-9 pr-4 text-xs sm:text-sm dark:text-slate-100 text-slate-900 font-medium placeholder-slate-500 focus:outline-none focus:border-[#7C3AED] transition-all"
+            placeholder="Search 60+ tools (e.g. PDF Merge, Converter, QR)..."
+            class="w-full dark:bg-slate-900/90 bg-slate-100 dark:text-slate-100 text-slate-900 font-bold text-xs sm:text-sm rounded-2xl py-2.5 pl-10 pr-12 placeholder-slate-500 focus:outline-none backdrop-blur-md"
           />
+          <span class="absolute right-3 top-2.5 text-[10px] dark:bg-slate-800 bg-slate-200 border dark:border-slate-700 border-slate-300 text-[#00F3FF] font-bold px-1.5 py-0.5 rounded-md font-mono hidden sm:inline-block">
+            ⌘K
+          </span>
         </div>
       </div>
 
@@ -229,7 +280,7 @@
           <span id="themeLabel" class="hidden md:inline text-[11px]">Light Mode</span>
         </button>
 
-        <!-- User Profile / Auth Button Container -->
+        <!-- User Profile Container -->
         <div id="authHeaderContainer"></div>
 
         <button onclick="goHome()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl dark:bg-slate-900 bg-slate-200 border dark:border-white/10 border-slate-400 text-xs font-bold dark:text-white text-slate-900 transition-all shadow-sm">
@@ -242,19 +293,19 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="heroSection" class="relative pt-8 pb-6 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto z-10">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full dark:bg-slate-900/90 bg-white border dark:border-white/10 border-slate-300 text-xs font-semibold text-brand-accent mb-4 shadow-sm">
+  <section id="heroSection" class="relative pt-10 pb-6 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto z-10">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full dark:bg-slate-900/90 bg-white border dark:border-white/10 border-slate-300 text-xs font-semibold text-[#00F3FF] mb-5 shadow-lg shadow-[#00F3FF]/5 backdrop-blur-md">
       <span>🚀 Client-Side Engine</span>
-      <span class="text-slate-400">•</span>
+      <span class="text-slate-500">•</span>
       <span class="dark:text-slate-300 text-slate-700">Protected Workspace</span>
     </div>
 
     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
       <span class="dark:bg-gradient-to-r dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-slate-950 dark:text-transparent">60+ Powerful Tools.</span> <br />
-      <span class="bg-gradient-to-r from-[#7C3AED] via-[#FF007F] to-[#7C3AED] bg-clip-text text-transparent">One Smart Workspace.</span>
+      <span class="bg-gradient-to-r from-[#00F3FF] via-[#7C3AED] to-[#FF007F] bg-clip-text text-transparent">One Smart Workspace.</span>
     </h1>
 
-    <p class="mt-3 text-xs sm:text-base dark:text-slate-400 text-slate-700 font-medium max-w-xl mx-auto leading-relaxed">
+    <p class="mt-3.5 text-xs sm:text-base dark:text-slate-400 text-slate-700 font-medium max-w-xl mx-auto leading-relaxed">
       Login to access PDF Merger, Format Converters, Scanners, and Password Verifiers securely.
     </p>
 
@@ -269,7 +320,7 @@
     <section id="toolWorkspace" class="hidden glass-panel rounded-2xl p-5 sm:p-7 mb-8 transition-all duration-500">
       <div class="flex items-center justify-between pb-4 border-b dark:border-white/10 border-slate-300 mb-5 flex-wrap gap-3">
         <div class="flex items-center gap-2.5">
-          <button onclick="goHome()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg dark:bg-slate-900 bg-slate-200 text-xs font-bold dark:text-slate-300 text-slate-800 hover:text-purple-600 transition-all">
+          <button onclick="goHome()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg dark:bg-slate-900 bg-slate-200 text-xs font-bold dark:text-slate-300 text-slate-800 hover:text-[#00F3FF] transition-all">
             🏠 Return
           </button>
           <div>
@@ -277,12 +328,12 @@
             <p id="activeToolDesc" class="text-xs dark:text-slate-400 text-slate-600 mt-0.5 font-medium"></p>
           </div>
         </div>
-        <span id="activeToolCategory" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/30"></span>
+        <span id="activeToolCategory" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#00F3FF]/10 text-[#00F3FF] border border-[#00F3FF]/30"></span>
       </div>
 
       <!-- Progress Line Bar -->
       <div id="loadingLineContainer" class="hidden my-3 space-y-1.5">
-        <div class="flex justify-between items-center text-xs font-mono text-purple-400">
+        <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
           <span id="loadingStatusText">Processing Task...</span>
           <span id="loadingPercentText">0%</span>
         </div>
@@ -311,7 +362,7 @@
 
       <!-- Modal Tabs -->
       <div class="flex border-b dark:border-white/10 border-slate-300 mb-6">
-        <button id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 py-2 font-bold text-xs border-b-2 border-[#7C3AED] text-[#7C3AED]">Login</button>
+        <button id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 py-2 font-bold text-xs border-b-2 border-[#00F3FF] text-[#00F3FF]">Login</button>
         <button id="signupTabBtn" onclick="switchAuthTab('signup')" class="flex-1 py-2 font-bold text-xs text-slate-400 border-b-2 border-transparent">Sign Up</button>
       </div>
 
@@ -319,17 +370,17 @@
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
           <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Email Address</label>
-          <input type="email" id="loginEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+          <input type="email" id="loginEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
         </div>
         <div>
           <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Password</label>
-          <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
         </div>
         
         <!-- Remember Me Checkbox -->
         <div class="flex items-center justify-between text-xs">
           <label class="flex items-center gap-2 cursor-pointer dark:text-slate-300 text-slate-700 font-semibold select-none">
-            <input type="checkbox" id="rememberMe" class="rounded border-slate-400 text-[#7C3AED] focus:ring-0 cursor-pointer" />
+            <input type="checkbox" id="rememberMe" class="rounded border-slate-400 text-[#00F3FF] focus:ring-0 cursor-pointer" />
             <span>Remember Me</span>
           </label>
         </div>
@@ -341,15 +392,15 @@
       <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
         <div>
           <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Full Name</label>
-          <input type="text" id="signupName" required placeholder="John Doe" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+          <input type="text" id="signupName" required placeholder="John Doe" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
         </div>
         <div>
           <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Email Address</label>
-          <input type="email" id="signupEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+          <input type="email" id="signupEmail" required placeholder="user@domain.com" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
         </div>
         <div>
           <label class="text-[11px] font-bold dark:text-slate-400 text-slate-700">Create Password</label>
-          <input type="password" id="signupPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+          <input type="password" id="signupPassword" required placeholder="••••••••" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-300 p-2.5 rounded-xl mt-1 text-xs dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
         </div>
         <button type="submit" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-pink mt-2">Create Account</button>
       </form>
@@ -359,7 +410,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="mt-auto border-t dark:border-white/10 border-slate-300 dark:bg-[#030712]/90 bg-white/90 backdrop-blur-xl z-10 py-6 text-slate-500 text-xs text-center">
+  <footer class="mt-auto border-t dark:border-white/10 border-slate-300 dark:bg-[#090d16]/90 bg-white/90 backdrop-blur-xl z-10 py-6 text-slate-500 text-xs text-center">
     SmartToolkit Pro © 2026. Production-Ready Suite.
   </footer>
 
@@ -403,7 +454,6 @@
     let isDarkMode = true;
     let currentUser = null;
 
-    // --- SHA-256 Helper ---
     async function computeSha256(str) {
       const buffer = new TextEncoder().encode(str);
       const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
@@ -411,14 +461,12 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // --- Auth State Management with Remember Me ---
     function initAuth() {
       const session = localStorage.getItem('smart_user_session');
       if (session) {
         currentUser = JSON.parse(session);
       }
 
-      // Check Remembered Email
       const rememberedEmail = localStorage.getItem('remembered_user_email');
       if (rememberedEmail) {
         const emailInput = document.getElementById('loginEmail');
@@ -444,7 +492,7 @@
         `;
       } else {
         container.innerHTML = `
-          <button onclick="openAuthModal()" class="px-3.5 py-2 rounded-xl bg-brand-accent text-[#030712] font-extrabold text-xs shadow-md transition-all">
+          <button onclick="openAuthModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#00F3FF] to-[#7C3AED] text-slate-950 font-black text-xs shadow-md hover:scale-105 transition-all">
             Login / Sign Up
           </button>
         `;
@@ -474,7 +522,7 @@
       if (tab === 'login') {
         loginForm.classList.remove('hidden');
         signupForm.classList.add('hidden');
-        loginBtn.className = "flex-1 py-2 font-bold text-xs border-b-2 border-[#7C3AED] text-[#7C3AED]";
+        loginBtn.className = "flex-1 py-2 font-bold text-xs border-b-2 border-[#00F3FF] text-[#00F3FF]";
         signupBtn.className = "flex-1 py-2 font-bold text-xs text-slate-400 border-b-2 border-transparent";
       } else {
         signupForm.classList.remove('hidden');
@@ -524,7 +572,6 @@
         currentUser = { name: user.name, email: user.email };
         localStorage.setItem('smart_user_session', JSON.stringify(currentUser));
 
-        // Handle Remember Me
         if (remember) {
           localStorage.setItem('remembered_user_email', email);
         } else {
@@ -550,7 +597,6 @@
       goHome();
     }
 
-    // --- Theme Switcher ---
     function toggleTheme() {
       isDarkMode = !isDarkMode;
       const html = document.documentElement;
@@ -603,7 +649,7 @@
           class="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
             activeCategory === cat.id
               ? 'bg-brand-accent text-slate-950 font-black shadow-md'
-              : 'dark:bg-slate-900/90 bg-slate-300 dark:text-slate-400 text-slate-900 font-extrabold dark:border-white/10 border-slate-400 hover:text-purple-600'
+              : 'dark:bg-slate-900/90 bg-slate-300 dark:text-slate-400 text-slate-900 font-extrabold dark:border-white/10 border-slate-400 hover:text-cyan-400'
           }"
         >
           <span class="mr-1">${cat.icon}</span> ${cat.name}
@@ -617,7 +663,6 @@
       renderToolsCatalog();
     }
 
-    // Render Cards with High-Contrast Text for Light Mode
     function renderToolsCatalog() {
       const container = document.getElementById('toolsCatalogSection');
       
@@ -645,7 +690,7 @@
                   <span class="text-xl p-1.5 rounded-lg dark:bg-slate-900 bg-slate-400 text-slate-950 dark:text-white dark:border-white/10 border-slate-500 group-hover:scale-105 transition-transform">${tool.icon}</span>
                   ${tool.badge ? `<span class="badge-pill badge-styled">${tool.badge}</span>` : ''}
                 </div>
-                <h3 class="text-sm font-black dark:text-white text-slate-950 group-hover:text-purple-600 transition-colors">${tool.name}</h3>
+                <h3 class="text-sm font-black dark:text-white text-slate-950 group-hover:text-cyan-400 transition-colors">${tool.name}</h3>
                 <p class="text-[11px] font-bold dark:text-slate-400 text-slate-900 mt-1 leading-relaxed">${tool.desc}</p>
               </div>
               <div class="mt-4 flex items-center justify-between text-[11px] font-black text-brand-accent">
@@ -690,7 +735,7 @@
       if (tool.id === 'qr-generator') {
         container.innerHTML = `
           <div class="space-y-3 max-w-lg mx-auto text-center">
-            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+            <input type="text" id="qrText" placeholder="Enter link or text for scannable QR..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
             <button onclick="execQrGenerator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Generate Scannable QR Code</button>
             <div id="qrOutput" class="flex flex-col items-center justify-center pt-3"></div>
           </div>
@@ -700,11 +745,11 @@
           <div class="space-y-3 max-w-lg mx-auto">
             <div>
               <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Plain Password String</label>
-              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+              <input type="text" id="verifyPlain" placeholder="Enter original password..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
             </div>
             <div>
               <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">SHA-256 Hash String</label>
-              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+              <input type="text" id="verifyHash" placeholder="Enter SHA-256 Hash..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
             </div>
             <button onclick="execVerifyPasswordHash()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Verify Password & Hash Match</button>
             <div id="outputContainer" class="mt-3"></div>
@@ -716,15 +761,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Loan Amount (₹)</label>
-                <input type="number" id="emiLoan" value="500000" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+                <input type="number" id="emiLoan" value="500000" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
               </div>
               <div>
                 <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Interest Rate (%)</label>
-                <input type="number" id="emiRate" step="0.1" value="8.5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+                <input type="number" id="emiRate" step="0.1" value="8.5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
               </div>
               <div>
                 <label class="text-[11px] font-bold dark:text-slate-400 text-slate-800">Tenure (Years)</label>
-                <input type="number" id="emiTenure" value="5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]" />
+                <input type="number" id="emiTenure" value="5" class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 p-2.5 rounded-xl mt-1 text-xs font-bold dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]" />
               </div>
             </div>
             <button onclick="execEmiCalculator()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Calculate Loan EMI</button>
@@ -734,13 +779,13 @@
       } else if (tool.category === 'pdf' || tool.category === 'image') {
         container.innerHTML = `
           <div class="space-y-4 max-w-xl mx-auto text-center">
-            <label class="block border-2 border-dashed border-[#7C3AED]/50 hover:border-[#7C3AED] dark:bg-slate-900/60 bg-slate-200 rounded-xl p-6 cursor-pointer transition-all">
+            <label class="block border-2 border-dashed border-[#00F3FF]/50 hover:border-[#00F3FF] dark:bg-slate-900/60 bg-slate-200 rounded-xl p-6 cursor-pointer transition-all">
               <span class="text-3xl block mb-1">📁</span>
               <span class="text-xs font-black dark:text-white text-slate-900 block">Select or Drop Files Here</span>
               <span class="text-[10px] font-bold text-slate-700 dark:text-slate-400 block mt-0.5">Processed safely in your browser</span>
               <input type="file" id="fileInput" multiple onchange="handleFileQueue(event)" class="hidden" />
             </label>
-            <div id="fileQueueStatus" class="text-[11px] text-purple-600 dark:text-cyan-400 font-mono font-bold"></div>
+            <div id="fileQueueStatus" class="text-[11px] text-cyan-400 font-mono font-bold"></div>
             <button onclick="execFileTask()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Execute Task</button>
             <div id="outputContainer" class="mt-3"></div>
           </div>
@@ -748,7 +793,7 @@
       } else {
         container.innerHTML = `
           <div class="space-y-3 max-w-xl mx-auto">
-            <textarea id="textInput" rows="4" placeholder="Type or paste input text here..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl p-3 text-xs font-mono dark:text-white text-slate-900 focus:outline-none focus:border-[#7C3AED]"></textarea>
+            <textarea id="textInput" rows="4" placeholder="Type or paste input text here..." class="w-full dark:bg-slate-900 bg-slate-100 border dark:border-white/10 border-slate-400 rounded-xl p-3 text-xs font-mono dark:text-white text-slate-900 focus:outline-none focus:border-[#00F3FF]"></textarea>
             <button onclick="execTextTask()" class="w-full py-2.5 rounded-xl text-xs font-bold glow-btn-cyan">Process Task</button>
             <div id="outputContainer" class="mt-3"></div>
           </div>
@@ -787,7 +832,7 @@
           const downloadBtn = document.createElement('a');
           downloadBtn.href = img.src;
           downloadBtn.download = 'Scannable_QRCode.png';
-          downloadBtn.className = 'mt-3 inline-block px-4 py-2 bg-purple-600 text-white font-bold text-[11px] rounded-lg shadow hover:bg-purple-700';
+          downloadBtn.className = 'mt-3 inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 font-bold text-[11px] rounded-lg shadow hover:bg-cyan-300';
           downloadBtn.innerText = '⬇ Download QR PNG';
           output.appendChild(downloadBtn);
         }
@@ -810,8 +855,8 @@
       setTimeout(hideProgressLine, 800);
 
       output.innerHTML = `
-        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs ${isMatch ? 'text-emerald-500 font-bold border-emerald-500/40' : 'text-rose-600 font-bold border-rose-500/40'}">
-          <p class="font-black text-sm mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
+        <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border font-mono text-xs ${isMatch ? 'text-emerald-400 border-emerald-500/40' : 'text-rose-500 border-rose-500/40'}">
+          <p class="font-bold text-sm mb-1">${isMatch ? '✅ MATCH CONFIRMED!' : '❌ HASH MATCH FAILED!'}</p>
           <p>• Plain Password: ${plain}</p>
           <p class="break-all">• Target Hash: ${hash}</p>
           <p class="break-all">• Computed Hash: ${computedHash}</p>
@@ -873,7 +918,7 @@
           output.innerHTML = `
             <div class="dark:bg-slate-950 bg-slate-100 p-3 rounded-xl border dark:border-white/10 border-slate-400 text-center">
               <p class="text-xs text-emerald-500 font-extrabold mb-2">✨ Merged PDF Ready!</p>
-              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-4 py-2 bg-purple-600 text-white rounded-lg text-xs font-bold shadow">⬇ Download Merged Master PDF</a>
+              <a href="${pdfUrl}" download="Merged_Document.pdf" class="inline-block px-4 py-2 bg-[#00F3FF] text-slate-950 rounded-lg text-xs font-bold shadow">⬇ Download Merged Master PDF</a>
             </div>
           `;
         } catch (err) {
@@ -928,7 +973,7 @@
                 ${convertedImagesCache.map(c => `
                   <div class="dark:bg-slate-950 bg-slate-100 p-2 rounded-xl border dark:border-white/10 border-slate-400 text-center">
                     <img src="${c.url}" class="w-full h-20 object-cover rounded mb-1.5" />
-                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-purple-600 dark:text-cyan-400 font-extrabold hover:underline">⬇ Download</a>
+                    <a href="${c.url}" download="${c.name}" class="text-[10px] text-cyan-400 font-bold hover:underline">⬇ Download</a>
                   </div>
                 `).join('')}
               </div>
